@@ -14,7 +14,7 @@ Questa è un'applicazione di gestione dei tornei di Basket! Questa applicazione 
 
 ## Tecnologie Utilizzate
 
-- **Next.js**: Next.js è stato utilizzato per lo sviluppo del frontend, fornendo una base solida per la creazione di un'applicazione web reattiva e performante.
+- **Next.js**: Il framework React utilizzato per lo sviluppo dell'applicazione. Le API di Next.js verranno utilizzate anche per la parte backend dell'applicazione.
 
 - **MySQL**: Il database utilizzato per memorizzare tutte le informazioni relative alle squadre, ai giocatori e ai punteggi delle partite è MySQL.
 
