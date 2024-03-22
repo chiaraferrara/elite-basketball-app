@@ -1,40 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BasketTourney Manager 
 
-## Getting Started
+Questa è un'applicazione di gestione dei tornei di Basket! Questa applicazione è stata sviluppata utilizzando Next.js e offre una serie di funzionalità per gestire un torneo di Basket in modo efficace.
 
-First, run the development server:
+## Funzionalità
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Login**: Accedi all'area riservata come amministratore per accedere alle funzionalità avanzate dell'applicazione.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Gestione delle Squadre**: Solo gli amministratori possono aggiungere nuove squadre e i relativi giocatori. Ogni giocatore può essere assegnato a una specifica squadra al momento dell'aggiunta al database.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Visualizzazione Dettaglio Squadra**: Gli utenti possono visualizzare i dettagli di ogni singola squadra, inclusi l'allenatore e i giocatori che ne fanno parte.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Gestione dei Punteggi**: L'applicazione offre un sistema per gestire i punteggi delle partite, seguendo le logiche tipiche del basket.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Tecnologie Utilizzate
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Next.js**: Next.js è stato utilizzato per lo sviluppo del frontend, fornendo una base solida per la creazione di un'applicazione web reattiva e performante.
 
-## Learn More
+- **MySQL**: Il database utilizzato per memorizzare tutte le informazioni relative alle squadre, ai giocatori e ai punteggi delle partite è MySQL.
 
-To learn more about Next.js, take a look at the following resources:
+## Configurazione
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Per configurare correttamente l'applicazione, è necessario seguire i seguenti passaggi:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Assicurati di avere installato Node.js e npm sul tuo sistema.
+2. Clona questo repository sul tuo computer.
+3. Installa tutte le dipendenze utilizzando il comando `npm install`.
+4. Configura il database MySQL, assicurandoti di avere un database creato con le tabelle necessarie per memorizzare le informazioni sulle squadre, i giocatori e i punteggi.
+5. Modifica il file `.env` per configurare le variabili d'ambiente necessarie per la connessione al database MySQL.
+6. Avvia l'applicazione utilizzando il comando `npm run dev`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
