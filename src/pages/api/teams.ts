@@ -15,10 +15,10 @@ export default async function handler(
     }
 
     if(req.method === "POST") {
-      const { name, coach, tournament_id } = req.body;
+      const { logo, name, coach } = req.body;
       const player = await executeQuery(
-        "INSERT INTO teams (name, team_id) VALUES (?, ?, ?)",
-        [name,coach]
+        "INSERT INTO teams (logo, name, coach) VALUES (?, ?, ?)",
+        [logo, name,coach]
       );
       res.status(200).json(player);
     }

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 03:15 PM
--- Server version: 8.1.0
--- PHP Version: 8.0.28
+-- Host: localhost:3316
+-- Generation Time: Mar 23, 2024 at 09:40 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,38 +28,40 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `players` (
-  `player_id` int NOT NULL,
+  `player_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `age` int NOT NULL,
-  `team_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `age` varchar(255) NOT NULL,
+  `team_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `players`
+--
+
+INSERT INTO `players` (`player_id`, `name`, `age`, `team_id`) VALUES
+(1, 'GIACOMO LEOPARDI', '24', 1),
+(2, 'MICHELLE OBAMA', '44', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `team`
+-- Table structure for table `teams`
 --
 
-CREATE TABLE `team` (
-  `team_id` int NOT NULL,
+CREATE TABLE `teams` (
+  `team_id` int(11) NOT NULL,
+  `logo` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `coach` varchar(255) NOT NULL,
-  `tournament_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
+  `points` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `tournament`
+-- Dumping data for table `teams`
 --
 
-CREATE TABLE `tournament` (
-  `torunament_id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `location` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `teams` (`team_id`, `logo`, `name`, `coach`, `points`) VALUES
+(1, 'https://pbs.twimg.com/profile_images/1720867051089113088/PZjEy6lZ_400x400.jpg', 'LAKERS', 'Darvin Ham', 0);
 
 --
 -- Indexes for dumped tables
@@ -73,17 +75,10 @@ ALTER TABLE `players`
   ADD KEY `team_id` (`team_id`);
 
 --
--- Indexes for table `team`
+-- Indexes for table `teams`
 --
-ALTER TABLE `team`
-  ADD PRIMARY KEY (`team_id`),
-  ADD KEY `tournament_id` (`tournament_id`);
-
---
--- Indexes for table `tournament`
---
-ALTER TABLE `tournament`
-  ADD PRIMARY KEY (`torunament_id`);
+ALTER TABLE `teams`
+  ADD PRIMARY KEY (`team_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -93,19 +88,13 @@ ALTER TABLE `tournament`
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `team`
+-- AUTO_INCREMENT for table `teams`
 --
-ALTER TABLE `team`
-  MODIFY `team_id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tournament`
---
-ALTER TABLE `tournament`
-  MODIFY `torunament_id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `teams`
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -115,13 +104,7 @@ ALTER TABLE `tournament`
 -- Constraints for table `players`
 --
 ALTER TABLE `players`
-  ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table `team`
---
-ALTER TABLE `team`
-  ADD CONSTRAINT `team_ibfk_1` FOREIGN KEY (`tournament_id`) REFERENCES `tournament` (`torunament_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
