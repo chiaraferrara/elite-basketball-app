@@ -49,7 +49,7 @@ export default function Team() {
             />
           </div>
           <div>
-            <label htmlFor="coach">Coach:</label>
+            <label>Coach:</label>
             <input
               type="text"
               id="coach"

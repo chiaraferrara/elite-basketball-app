@@ -67,17 +67,23 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    fetchPlayersAndTeams();
+  }, []);
+
   return (
     <>
-      <button
+      {/* <button
         onClick={() => {
           fetchPlayersAndTeams();
         }}
       >
         Show Players and Teams
-      </button>
+      </button> */}
 
-      {players.map((player: any) => (
+      {/* VIEW PLAYERS */}
+
+      {/* {players.map((player: any) => (
         <div key={player.id}>
           <h1>{player.name}</h1>
           <p>
@@ -87,19 +93,22 @@ export default function Home() {
           </p>
         </div>
       ))}
-      <hr />
+      <hr /> */}
 
       {teams.map((team: any) => (
         <div key={team.id}>
           <img src={team.logo} alt="team logo" />
           <h1>{team.name}</h1>
           Coach: <h3>{team.coach}</h3>
-          <p>Players:</p>
+          {team.players.length > 0 && <p>Players:</p>}
           {team.players.map((player: any) => (
             <div key={player.id}>
               <h1>{player.name}</h1>
             </div>
           ))}
+          {team.players.length === 0 && (
+            <p>There's no players in this team yet...</p>
+          )}
         </div>
       ))}
     </>

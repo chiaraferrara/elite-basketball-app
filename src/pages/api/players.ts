@@ -14,13 +14,14 @@ export default async function handler(
     }
 
     if(req.method === "POST") {
-      const { name, team_id } = req.body;
+      const { picture, name, age, team_id } = req.body;
       const player = await executeQuery(
-        "INSERT INTO players (name, team_id) VALUES (?, ?)",
-        [name, team_id]
+        "INSERT INTO players (picture, name, age, team_id) VALUES (?, ?, ?, ?)",
+        [picture, name, age, team_id]
       );
       res.status(200).json(player);
     }
+
 
     
   } 
