@@ -14,6 +14,14 @@ export default async function handler(
       res.status(200).json(team);
     }
 
+    if(req.method == "PATCH"){
+      const {points_scored, points_given , total_points} = req.body;
+      const team = await executeQuery(
+        'UPDATE teams SET points_scored =  points_scored + ?, points_given = points_given + ?, total_points = total_points + ? WHERE team_id = ?', [points_scored, points_given, total_points, team_id]
+      );
+      res.status(200).json(team);
+    }
+
 
     if (req.method === "DELETE") {
       const team = await executeQuery(
