@@ -1,4 +1,4 @@
-# BasketTourney Manager 
+# Elite Basketball
 
 Questa è un'applicazione di gestione dei tornei di Basket! Questa applicazione è stata sviluppata utilizzando Next.js e offre una serie di funzionalità per gestire un torneo di Basket in modo efficace.
 
