@@ -14,6 +14,45 @@ export default function Game() {
     setTeams(data);
   };
 
+  const patchTeam = async (
+    team_id: any,
+    points_scored: number,
+    points_given: number,
+    total_points: number
+  ) => {
+    const response = await fetch(`/api/team/${team_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        points_scored: points_scored,
+        points_given: points_given,
+        total_points: total_points,
+      }),
+    });
+    const data = await response.json();
+  };
+
+  const updateTeamPoints = async (
+    team_id: any,
+    points_team1: any,
+    points_team2: any
+  ) => {
+    if (team_id == id_team1 && points_team1 > points_team2) {
+      patchTeam(team_id, points_team1, points_team2, 2);
+    } else if (team_id == id_team2 && points_team2 > points_team1) {
+      patchTeam(team_id, points_team2, points_team1, 2);
+    } else if (team_id == id_team1 && points_team1 < points_team2) {
+      patchTeam(team_id, points_team1, points_team2, 0);
+    } else if (team_id == id_team2 && points_team2 < points_team1) {
+      patchTeam(team_id, points_team2, points_team1, 0);
+    }
+    // else {
+    // patchTeam(team_id, points_team1, points_team2, 1)
+    // }
+  };
+
   const addGameToDB = async (event: any) => {
     event.preventDefault();
 
@@ -46,6 +85,8 @@ export default function Game() {
           method="post"
           onSubmit={(event) => {
             addGameToDB(event);
+            updateTeamPoints(id_team1, team1Points, team2Points);
+            updateTeamPoints(id_team2, team2Points, team1Points);
           }}
         >
           <div>
