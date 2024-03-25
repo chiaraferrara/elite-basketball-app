@@ -48,9 +48,6 @@ export default function Game() {
     } else if (team_id == id_team2 && points_team2 < points_team1) {
       patchTeam(team_id, points_team2, points_team1, 0);
     }
-    // else {
-    // patchTeam(team_id, points_team1, points_team2, 1)
-    // }
   };
 
   const addGameToDB = async (event: any) => {
@@ -83,10 +80,11 @@ export default function Game() {
 
         <form
           method="post"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             addGameToDB(event);
-            updateTeamPoints(id_team1, team1Points, team2Points);
-            updateTeamPoints(id_team2, team2Points, team1Points);
+            updateTeamPoints(id_team1, team1Points, team2Points).then(() => {
+              updateTeamPoints(id_team2, team1Points, team2Points);
+            });
           }}
         >
           <div>
