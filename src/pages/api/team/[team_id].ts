@@ -13,5 +13,13 @@ export default async function handler(
       );
       res.status(200).json(team);
     }
+
+
+    if (req.method === "DELETE") {
+      const team = await executeQuery(
+        'DELETE FROM teams WHERE team_id = ?', [team_id]
+      );
+      res.status(200).json(team);
+    }
     
   } 
