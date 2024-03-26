@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
 import { Team } from "../declarations/declarations";
+import Link from "next/link";
 
 export default function Team() {
   const { fetchTeam } = useContext(Context);
@@ -10,19 +11,45 @@ export default function Team() {
 
   const router = useRouter();
   const { idTeam } = router.query;
+  const teamId = Number(idTeam);
+
+  //funzione che mi ritorna i dati del team
+  const fetchDataFromAPI = async () => {
+    try {
+      const fetchedTeam = await fetchTeam(teamId);
+      setTeam(fetchedTeam);
+      localStorage.setItem("team", JSON.stringify(fetchedTeam));
+    } catch (error) {
+      console.error("Errore:", error);
+    }
+  };
+
+  const loadTeamFromLocalStorage = () => {
+    const lsTeam = localStorage.getItem("team");
+    if (lsTeam) {
+      const parsedTeam = JSON.parse(lsTeam);
+
+      //se il team_id del team in local storage è uguale a quello passato nell'url ritorno il team
+      //altrimenti ritorno null
+      return parsedTeam?.[0]?.team_id === teamId ? parsedTeam : null;
+    }
+    return null;
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedTeam = await fetchTeam(Number(idTeam));
-        // console.log("Team", fetchedTeam);
-        setTeam(fetchedTeam);
-      } catch (error) {
-        console.error("Error fetching team:", error);
+    const loadTeam = async () => {
+      const lsTeam = loadTeamFromLocalStorage();
+      if (lsTeam) {
+        setTeam(lsTeam);
+        setLoading(false);
+      } else {
+        await fetchDataFromAPI();
+        setLoading(false);
       }
     };
-
-    fetchData().then(() => setLoading(false));
+    if (idTeam) {
+      loadTeam();
+    }
   }, [idTeam]);
 
   if (loading) {
@@ -35,6 +62,7 @@ export default function Team() {
 
   return (
     <div>
+      <Link href="/">Go back</Link>
       <h1>{team?.[0]?.name}</h1>
 
       {team?.[0]?.logo && <img src={team[0].logo} alt="team logo" />}
