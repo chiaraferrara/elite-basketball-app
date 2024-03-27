@@ -16,8 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}
       />
-      <Navbar />
+
       <ContextProvider>
+        <Navbar />
         <Component {...pageProps} />
       </ContextProvider>
     </>

@@ -27,9 +27,9 @@ export default function login() {
     <>
       <h1>Login</h1>
       <form
-        action=""
-        onSubmit={(event) => {
-          authentication(event);
+        onSubmit={async (event) => {
+          await authentication(event);
+          setIsLogged(true);
         }}
       >
         <div className="form-group">

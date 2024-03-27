@@ -14,10 +14,12 @@ export const Button = styled.button`
     background-color: #f02b2b;
     color: black;
     font-weight: bold;
-    height: 70px;
-    font-size: 0.9rem;
+    height: 30px;
+    min-width: 130px;
+    font-size: 12px;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
+    box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
     padding: 0.5rem 1rem;
     margin: 3px;
     margin-inline: 10px;
@@ -57,11 +59,12 @@ export const Button = styled.button`
     `
 
     export const PlayerName = styled.h3`
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     `;
 
 export const Nav = styled.div`
     display: flex;
+
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
