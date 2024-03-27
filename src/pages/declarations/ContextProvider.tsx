@@ -1,11 +1,9 @@
-import { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useState } from "react";
 import { Player, TContext, Team } from "./declarations";
 
 export const Context = createContext<TContext>({
   players: [],
-  setPlayers: () => {},
   teams: [],
-  setTeams: () => {},
   fetchPlayersAndTeams: async () => ({ teams: [] }),
   fetchTeam: async () => ({}),
   isLogged: false,
@@ -88,9 +86,7 @@ export default function ContextProvider({ children }: Props) {
     <Context.Provider
       value={{
         players,
-        setPlayers,
         teams,
-        setTeams,
         fetchPlayersAndTeams,
         fetchTeam,
         isLogged,
