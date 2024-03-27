@@ -3,6 +3,16 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
 import { Team } from "../declarations/declarations";
 import Link from "next/link";
+import {
+  Button,
+  PlayerName,
+  PointsDetail,
+  PreviewPic,
+  Row,
+  RowWrap,
+  TeamWrapper,
+  Wrapper,
+} from "@/styles/globals";
 
 export default function Team() {
   const { fetchTeam } = useContext(Context);
@@ -62,24 +72,57 @@ export default function Team() {
 
   return (
     <div>
-      <Link href="/">Go back</Link>
-      <h1>{team?.[0]?.name}</h1>
+      {/* to add check on login */}
+      <>
+        <Button>Edit Team</Button>
+        <Button>Delete Team</Button>
+      </>
 
-      {team?.[0]?.logo && <img src={team[0].logo} alt="team logo" />}
-      <h2>Coach: {team?.[0]?.coach}</h2>
-      <ul>
-        <li>Total Points : {team?.[0]?.total_points}</li>
-      </ul>
+      <Wrapper>
+        <RowWrap>
+          <TeamWrapper>
+            <h1>{team?.[0]?.name}</h1>
+            <PointsDetail>
+              <div style={{ margin: "10px", textAlign: "center" }}>
+                Total Points:
+                <br />
+                {team?.[0]?.total_points}
+              </div>
+              <div style={{ margin: "10px", textAlign: "center" }}>
+                Points scored:
+                <br />
+                {team?.[0]?.points_scored}
+              </div>
 
-      <h2>Players:</h2>
-      <ul>
-        {team?.[0]?.players.map((player: any) => (
-          <li key={player.player_id}>
-            <p>Name: {player.name}</p>
-            <p>Age: {player.age}</p>
-          </li>
-        ))}
-      </ul>
+              <div style={{ margin: "10px", textAlign: "center" }}>
+                Points Given:
+                <br />
+                {team?.[0]?.points_given}
+              </div>
+            </PointsDetail>
+            {team?.[0]?.logo && (
+              <PreviewPic src={team[0].logo} alt="team logo" />
+            )}
+            <p>
+              Coach:
+              <br /> {team?.[0]?.coach}
+            </p>
+            {team?.[0]?.players.length > 0 && (
+              <div>
+                <Row>
+                  {team?.[0]?.players.map((player: any) => (
+                    <div style={{ textAlign: "center" }} key={player.player_id}>
+                      <PreviewPic src={player.picture} alt="player pic" />
+                      <PlayerName>{player.name}</PlayerName>
+                      <p>Age: {player.age}</p>
+                    </div>
+                  ))}
+                </Row>
+              </div>
+            )}
+          </TeamWrapper>
+        </RowWrap>
+      </Wrapper>
     </div>
   );
 }
