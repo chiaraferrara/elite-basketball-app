@@ -1,4 +1,3 @@
-import { Team } from "@/declarations";
 import { use, useEffect, useState } from "react";
 
 export default function Player() {
@@ -67,6 +66,7 @@ export default function Player() {
               value={playerName}
               onChange={(event) => {
                 setPlayerName(event.target.value);
+                console.log(playerName);
               }}
             />
           </div>
