@@ -54,21 +54,24 @@ export default function Game() {
 
   const addGameToDB = async (event: any) => {
     event.preventDefault();
+    if (id_team1 != id_team2) {
+      const response = await fetch("/api/games", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id_team1: id_team1,
+          id_team2: id_team2,
+          team1_points: team1Points,
+          team2_points: team2Points,
+        }),
+      });
 
-    const response = await fetch("/api/games", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id_team1: id_team1,
-        id_team2: id_team2,
-        team1_points: team1Points,
-        team2_points: team2Points,
-      }),
-    });
-
-    const data = await response.json();
+      const data = await response.json();
+    } else {
+      alert("Select different teams");
+    }
   };
 
   useEffect(() => {
