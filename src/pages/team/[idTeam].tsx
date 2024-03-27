@@ -18,6 +18,7 @@ export default function Team() {
   const { fetchTeam } = useContext(Context);
   const [team, setTeam] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const { isLogged, setIsLogged } = useContext(Context);
 
   const router = useRouter();
   const { idTeam } = router.query;
@@ -73,12 +74,9 @@ export default function Team() {
   return (
     <div>
       {/* to add check on login */}
-      <>
-        <Button>Edit Team</Button>
-        <Button>Delete Team</Button>
-      </>
 
       <Wrapper>
+        {" "}
         <RowWrap>
           <TeamWrapper>
             <h1>{team?.[0]?.name}</h1>
@@ -121,7 +119,15 @@ export default function Team() {
               </div>
             )}
           </TeamWrapper>
-        </RowWrap>
+        </RowWrap>{" "}
+        {isLogged ? (
+          <>
+            <Button>Edit Team</Button>
+            <Button>Delete Team</Button>
+          </>
+        ) : (
+          <></>
+        )}
       </Wrapper>
     </div>
   );
