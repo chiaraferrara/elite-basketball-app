@@ -8,6 +8,8 @@ export const Context = createContext<TContext>({
   setTeams: () => {},
   fetchPlayersAndTeams: async () => ({ teams: [] }),
   fetchTeam: async () => ({}),
+  isLogged: false,
+  setIsLogged: () => {},
 });
 
 interface Props {
@@ -17,6 +19,7 @@ interface Props {
 export default function ContextProvider({ children }: Props) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
+  const [isLogged, setIsLogged] = useState(false);
 
   //questo mi ritorna i team
   const fetchTeams = async () => {
@@ -90,6 +93,8 @@ export default function ContextProvider({ children }: Props) {
         setTeams,
         fetchPlayersAndTeams,
         fetchTeam,
+        isLogged,
+        setIsLogged,
       }}
     >
       {children}
