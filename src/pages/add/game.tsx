@@ -18,7 +18,8 @@ export default function Game() {
     team_id: any,
     points_scored: number,
     points_given: number,
-    total_points: number
+    total_points: number,
+    played_games: number
   ) => {
     const response = await fetch(`/api/team/${team_id}`, {
       method: "PATCH",
@@ -29,6 +30,7 @@ export default function Game() {
         points_scored: points_scored,
         points_given: points_given,
         total_points: total_points,
+        played_games: played_games,
       }),
     });
     const data = await response.json();
@@ -40,13 +42,13 @@ export default function Game() {
     points_team2: any
   ) => {
     if (team_id == id_team1 && points_team1 > points_team2) {
-      patchTeam(team_id, points_team1, points_team2, 2);
+      patchTeam(team_id, points_team1, points_team2, 2, 1);
     } else if (team_id == id_team2 && points_team2 > points_team1) {
-      patchTeam(team_id, points_team2, points_team1, 2);
+      patchTeam(team_id, points_team2, points_team1, 2, 1);
     } else if (team_id == id_team1 && points_team1 < points_team2) {
-      patchTeam(team_id, points_team1, points_team2, 0);
+      patchTeam(team_id, points_team1, points_team2, 0, 1);
     } else if (team_id == id_team2 && points_team2 < points_team1) {
-      patchTeam(team_id, points_team2, points_team1, 0);
+      patchTeam(team_id, points_team2, points_team1, 0, 1);
     }
   };
 
@@ -95,6 +97,7 @@ export default function Game() {
                 setTeam_id1(event.target.value);
               }}
             >
+              <option>Select Home team</option>
               {teams.map((team: any) => (
                 <option key={team.team_id} value={team.team_id}>
                   {team.name}
@@ -110,6 +113,7 @@ export default function Game() {
                 setTeam_id2(event.target.value);
               }}
             >
+              <option>Select away team</option>
               {teams.map((team: any) => (
                 <option key={team.team_id} value={team.team_id}>
                   {team.name}
