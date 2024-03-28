@@ -8,6 +8,8 @@ export const Context = createContext<TContext>({
   fetchTeam: async () => ({}),
   isLogged: false,
   setIsLogged: () => {},
+  fetchGames: async () => [],
+  games: [],
 });
 
 interface Props {
@@ -18,6 +20,7 @@ export default function ContextProvider({ children }: Props) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
   const [isLogged, setIsLogged] = useState(false);
+  const [games, setGames] = useState<any[]>([]);
 
   //questo mi ritorna i team
   const fetchTeams = async () => {
@@ -82,6 +85,35 @@ export default function ContextProvider({ children }: Props) {
     }
   };
 
+  const fetchGames = async () => {
+    try {
+      const gamesRes = await fetch("/api/games");
+      const gamesData = await gamesRes.json();
+
+      const teamsRes = await fetch("/api/teams");
+      const teamsData = await teamsRes.json();
+
+      const gamesWithTeams = gamesData.map((game: any) => {
+        const homeTeam = teamsData.find(
+          (team: any) => team.team_id === game.id_team1
+        );
+        const awayTeam = teamsData.find(
+          (team: any) => team.team_id === game.id_team2
+        );
+
+        return {
+          ...game,
+          home_team: homeTeam,
+          away_team: awayTeam,
+        };
+      });
+
+      setGames(gamesWithTeams);
+    } catch (error) {
+      console.error("Error fetching games:", error);
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -91,6 +123,8 @@ export default function ContextProvider({ children }: Props) {
         fetchTeam,
         isLogged,
         setIsLogged,
+        fetchGames,
+        games,
       }}
     >
       {children}
