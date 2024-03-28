@@ -27,8 +27,13 @@ const Navbar = () => {
         <Link href="/">
           <Button>Home</Button>
         </Link>
-        <Link href="/contacts">
-          <Button>Contacts</Button>
+
+        <Link href="/teams">
+          <Button>Teams</Button>
+        </Link>
+
+        <Link href="/games">
+          <Button>Games</Button>
         </Link>
 
         {!isLogged ? (
