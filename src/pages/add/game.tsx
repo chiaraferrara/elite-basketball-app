@@ -63,6 +63,7 @@ export default function Game() {
         body: JSON.stringify({
           id_team1: id_team1,
           id_team2: id_team2,
+          date: date,
           team1_points: team1Points,
           team2_points: team2Points,
         }),
@@ -131,7 +132,7 @@ export default function Game() {
               type="date"
               id="date"
               name="date"
-              value={date ? date.toISOString().slice(0, 10) : ""}
+              value={date ? date.toLocaleDateString() : ""}
               onChange={(event) => {
                 const selectedDate = new Date(event.target.value);
                 setDate(selectedDate);

@@ -180,3 +180,52 @@ export const Nav = styled.div`
     }
     
     `;
+
+
+    export const GameWrapper = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    background-color: #f7f7f7;
+    color: black;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    align-items: center;
+    `;
+
+    export const GamesRow = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+    `;
+
+    export const TeamGameColumn = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    `;
+
+
+    export const TeamName = styled.span`
+    
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; 
+    
+
+  `;
+
+  export const DateRow = styled.p`
+  background-color: #212322;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  `;

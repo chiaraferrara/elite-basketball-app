@@ -13,6 +13,7 @@ export interface Player {
   age: number;
   team: string;
   team_id: number;
+
 }
 
   export interface TContext {
@@ -22,5 +23,7 @@ export interface Player {
     fetchTeam : (id: number) => Promise<any>;
     isLogged: boolean;
     setIsLogged:  (value: boolean) => void;
+    fetchGames: () => Promise<any>;
+    games: any[];
   }
    
