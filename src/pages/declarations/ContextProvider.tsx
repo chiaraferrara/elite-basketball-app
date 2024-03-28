@@ -10,6 +10,9 @@ export const Context = createContext<TContext>({
   setIsLogged: () => {},
   fetchGames: async () => [],
   games: [],
+  setGames: () => {},
+  update: false,
+  setUpdate: () => {},
 });
 
 interface Props {
@@ -21,6 +24,7 @@ export default function ContextProvider({ children }: Props) {
   const [teams, setTeams] = useState<Team[]>([]);
   const [isLogged, setIsLogged] = useState(false);
   const [games, setGames] = useState<any[]>([]);
+  const [update, setUpdate] = useState(false); //per fare il refresh dei games
 
   //questo mi ritorna i team
   const fetchTeams = async () => {
@@ -125,6 +129,9 @@ export default function ContextProvider({ children }: Props) {
         setIsLogged,
         fetchGames,
         games,
+        setGames,
+        update,
+        setUpdate,
       }}
     >
       {children}

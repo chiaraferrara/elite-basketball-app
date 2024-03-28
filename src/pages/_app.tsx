@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import ContextProvider from "./declarations/ContextProvider";
 import Navbar from "@/pages/components/Navbar";
 import { Global, css } from "@emotion/react";
+import GamesList from "./components/GamesList";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <ContextProvider>
         <Navbar />
+        <GamesList />
         <Component {...pageProps} />
       </ContextProvider>
     </>
