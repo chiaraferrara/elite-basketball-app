@@ -13,6 +13,7 @@ import {
   TeamWrapper,
   Wrapper,
 } from "@/styles/globals";
+import GamesList from "../components/GamesList";
 
 export default function Team() {
   const { fetchTeam } = useContext(Context);
@@ -74,7 +75,7 @@ export default function Team() {
   return (
     <div>
       {/* to add check on login */}
-
+      <GamesList />
       <Wrapper>
         {" "}
         <RowWrap>

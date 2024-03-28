@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
+import GamesList from "../components/GamesList";
 
 export default function Game() {
   const [teams, setTeams] = useState<any>([]);
@@ -83,6 +84,7 @@ export default function Game() {
 
   return (
     <>
+      <GamesList />
       <div>
         <h1>Add Game</h1>
 

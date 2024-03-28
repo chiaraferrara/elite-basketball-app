@@ -20,7 +20,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <ContextProvider>
         <Navbar />
-        <GamesList />
         <Component {...pageProps} />
       </ContextProvider>
     </>
