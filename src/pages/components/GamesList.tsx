@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
 import {
+  Button,
   DateRow,
   GameWrapper,
   GamesRow,
@@ -10,15 +11,32 @@ import {
   TeamGameColumn,
   TeamName,
 } from "@/styles/globals";
+import { Typography } from "@mui/material";
 
 export default function GamesList() {
+  const [loading, setLoading] = useState(true);
   const { fetchGames } = useContext(Context);
-  const { games } = useContext(Context);
+  const { games, setGames } = useContext(Context);
+  const { update } = useContext(Context);
+  const { isLogged } = useContext(Context);
+
+  const onClickDelete = async (game_id: any) => {
+    const response = await fetch(`/api/game/${game_id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      setLoading(true);
+    }
+    const data = await response.json();
+    console.log(data);
+  };
 
   useEffect(() => {
-    fetchGames();
-    console.log(games);
-  }, []);
+    fetchGames().then(() => setLoading(false));
+    const recentGames = games.reverse().slice(0, 4);
+    setGames(recentGames);
+  }, [update, loading]);
+
   //metodo per formattare la data da "2024-03-13T23:00:00.000Z" a "13/03/2024"
   const formatDate = (dateString: any) => {
     const date = new Date(dateString);
@@ -30,6 +48,7 @@ export default function GamesList() {
     return `${day}/${month}/${year}`;
   };
 
+  if (loading) return <GamesRow>Loading games...</GamesRow>;
   return (
     <GamesRow>
       {games?.map((game: any) => (
@@ -53,6 +72,18 @@ export default function GamesList() {
               <p> {game.team2_points}</p>{" "}
             </TeamGameColumn>
           </GameWrapper>
+          {isLogged ? (
+            <Button
+              onClick={() => {
+                onClickDelete(game.id_game);
+              }}
+              type="button"
+            >
+              Delete
+            </Button>
+          ) : (
+            <></>
+          )}
         </div>
       ))}
     </GamesRow>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../declarations/ContextProvider";
 
 export default function Game() {
   const [teams, setTeams] = useState<any>([]);
@@ -7,7 +8,7 @@ export default function Game() {
   const [team1Points, setTeam1Points] = useState<any>(0);
   const [team2Points, setTeam2Points] = useState<any>(0);
   const [date, setDate] = useState<Date | undefined>(undefined);
-
+  const { setUpdate } = useContext(Context);
   const getTeams = async () => {
     const response = await fetch("/api/teams");
     const data = await response.json();
@@ -73,6 +74,7 @@ export default function Game() {
     } else {
       alert("Select different teams");
     }
+    setUpdate(true);
   };
 
   useEffect(() => {

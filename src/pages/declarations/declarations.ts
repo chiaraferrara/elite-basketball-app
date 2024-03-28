@@ -25,5 +25,8 @@ export interface Player {
     setIsLogged:  (value: boolean) => void;
     fetchGames: () => Promise<any>;
     games: any[];
+    setGames: (value: any) => void;
+    update: boolean;
+    setUpdate: (value: boolean) => void;
   }
    
