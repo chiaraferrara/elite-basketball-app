@@ -5,6 +5,7 @@ import {
   DateRow,
   GameWrapper,
   GamesRow,
+  PageButton,
   PlayerName,
   PreviewPic,
   Row,
@@ -73,14 +74,14 @@ export default function GamesList() {
             </TeamGameColumn>
           </GameWrapper>
           {isLogged ? (
-            <Button
+            <PageButton
               onClick={() => {
                 onClickDelete(game.id_game);
               }}
               type="button"
             >
               Delete
-            </Button>
+            </PageButton>
           ) : (
             <></>
           )}

@@ -50,6 +50,48 @@ export const Button = styled.button`
   }
 `;
 
+
+export const PageButton = styled.button`
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: black;
+  font-weight: bold;
+  height: 30px;
+  min-width: 130px;
+  font-size: 12px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
+  padding: 0.5rem 1rem;
+  margin: 3px;
+  margin-inline: 10px;
+  border: none;
+  cursor: pointer;
+  z-index: 0;
+  transition: all 0.3s ease;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #212322;
+    z-index: -1;
+    transition: height 0.3s ease;
+  }
+
+  &:hover:before {
+    height: 100%;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -248,9 +290,55 @@ export const FooterContainer = styled.footer`
   font-size: 15px;
   line-height: 24px;
   color: white;
+  box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
 `;
 
 export const Logos = styled.img`
   height: 60px;
   margin: 20px;
+`;
+
+export const LeaderboardRow = styled.div`
+  font-size: 1.8rem;
+`;
+
+export const Table = styled.table`
+width: 80%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 7rem;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+
+  a{
+    color: black;
+    text-decoration: none;
+  
+  }
+
+  a:visited{
+    color: black;
+  }
+`;
+
+export const Tr = styled.tr`
+height: 90px;
+  border-bottom: 1px solid #f7f7f7;
+  color: white;
+`;
+
+export const Thead = styled.thead`
+background: rgb(33,35,34);
+background: linear-gradient(180deg, rgba(33,35,34,1) 2%, rgba(33,35,34,1) 3%, rgba(33,35,34,1) 13%, rgba(33,35,34,1) 60%, rgba(33,35,34,1) 87%, rgba(240,43,43,1) 91%, rgba(240,43,43,1) 92%, rgba(240,43,43,1) 100%);
+padding: 3rem;
+color: white;
+`;
+
+export const Td = styled.td`
+  padding: 1rem;
 `;

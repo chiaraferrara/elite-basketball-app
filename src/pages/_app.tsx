@@ -18,7 +18,17 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}
       />
-
+      {/* background: rgb(36, 36, 36);
+            background: linear-gradient(
+              120deg,
+              rgba(36, 36, 36, 1) 0%,
+              rgba(86, 37, 36, 1) 10%,
+              rgba(178, 38, 37, 1) 30%,
+              rgba(183, 38, 37, 1) 50%,
+              rgba(174, 38, 37, 1) 70%,
+              rgba(110, 37, 36, 1) 90%,
+              rgba(53, 36, 36, 1) 100%
+            ); */}
       <ContextProvider>
         <Navbar />
         <Component {...pageProps} />

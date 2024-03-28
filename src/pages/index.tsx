@@ -3,6 +3,7 @@ import { Context } from "./declarations/ContextProvider";
 import Link from "next/link";
 import { Player, Team } from "./declarations/declarations";
 import GamesList from "./components/GamesList";
+import Leaderboard from "./components/Leaderboard";
 
 export default function Home() {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -21,15 +22,16 @@ export default function Home() {
   return (
     <>
       <GamesList />
-      <h1>Teams</h1>
-      {teams.map((team: any) => (
+      {/* <h1>Teams</h1> */}
+      {/* {teams.map((team: any) => (
         <div key={team.id}>
           <img src={team.logo} alt="team logo" />
           <h1>{team.name}</h1>
           <Link href={`team/${team.team_id}`}>Go to team page</Link>
           <br />
         </div>
-      ))}
+      ))} */}
+      <Leaderboard />
     </>
   );
 }
