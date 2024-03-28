@@ -3,6 +3,7 @@ import ContextProvider from "./declarations/ContextProvider";
 import Navbar from "@/pages/components/Navbar";
 import { Global, css } from "@emotion/react";
 import GamesList from "./components/GamesList";
+import Footer from "./components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ContextProvider>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </ContextProvider>
     </>
   );
