@@ -12,7 +12,7 @@ import {
   TeamGameColumn,
   TeamName,
 } from "@/styles/globals";
-import { Typography } from "@mui/material";
+import deleteIcon from "../../assets/delete.png";
 
 export default function GamesList() {
   const [loading, setLoading] = useState(true);
@@ -80,7 +80,7 @@ export default function GamesList() {
               }}
               type="button"
             >
-              Delete
+              delete
             </PageButton>
           ) : (
             <></>
