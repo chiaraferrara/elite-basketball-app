@@ -54,7 +54,6 @@ export const Button = styled.button`
   }
 `;
 
-
 export const PageButton = styled.button`
   position: relative;
   overflow: hidden;
@@ -298,12 +297,12 @@ export const Logos = styled.img`
 
 export const LeaderboardRow = styled.div`
   font-size: 1.8rem;
-  overflow-x:auto;
+  overflow-x: auto;
 `;
 
 export const Table = styled.table`
   border-collapse: collapse;
-   margin: 0 auto;
+  margin: 0 auto;
   margin-top: 1rem;
   margin-bottom: 7rem;
   background-color: #f7f7f7;
@@ -312,35 +311,57 @@ export const Table = styled.table`
   font-weight: 600;
   font-size: 0.9rem;
 
-
-  a{
+  a {
     color: black;
     text-decoration: none;
-  
   }
 
-  a:visited{
+  a:visited {
     color: black;
   }
 `;
 
 export const Tr = styled.tr`
-height: 90px;
+  height: 90px;
   border-bottom: 1px solid #f7f7f7;
-  color: white;
 `;
 
 export const Thead = styled.thead`
-background: rgb(33,35,34);
-padding: 3rem;
-color: white;
+  background: rgb(33, 35, 34);
+  padding: 3rem;
+  color: white;
 `;
 
 export const Td = styled.td`
-  padding: 1rem; 
+  padding: 1rem;
   transition: all 0.3s ease;
 `;
 
-export const Th =   styled.th`
+export const Th = styled.th`
   padding: 1rem;
+`;
+
+export const TeamDiv = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  margin: 2%;
+  font-variant: all-small-caps;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+`;
+
+export const TeamImg = styled.img`
+  height: 120px;
+  width: 120px;
+  border-radius: 100%;
+`;
+
+export const TeamRow = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 `;

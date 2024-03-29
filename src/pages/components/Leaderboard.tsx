@@ -63,7 +63,7 @@ export default function Leaderboard() {
           </Thead>
           <TableBody>
             {teams.map((team: any, index: number) => (
-              <tr key={team.team_id}>
+              <Tr key={team.team_id}>
                 <Td style={{ textAlign: "center" }}>{index + 1}</Td>
                 <Td style={{ marginLeft: "40px" }}>
                   <Link href={`/team/${team.team_id}`}>{team.name}</Link>
@@ -83,7 +83,7 @@ export default function Leaderboard() {
                 </Td>
 
                 <Td style={{ textAlign: "center" }}>{team.total_points}</Td>
-              </tr>
+              </Tr>
             ))}
           </TableBody>
         </Table>
