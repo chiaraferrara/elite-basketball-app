@@ -16,7 +16,7 @@ export const MinHeight = styled.div`
 export const Button = styled.button`
   position: relative;
   overflow: hidden;
-  background-color: #f02b2b;
+  background-color: #d5caac;
   color: black;
   font-weight: bold;
   height: 30px;
@@ -232,19 +232,7 @@ export const GameWrapper = styled.div`
   letter-spacing: 0.1rem;
   align-items: center;
   background: rgb(240, 43, 43);
-  background: linear-gradient(
-    90deg,
-    rgba(240, 43, 43, 1) 0%,
-    rgba(240, 43, 43, 1) 1%,
-    rgba(242, 242, 242, 1) 1%,
-    rgba(245, 245, 245, 1) 1%,
-    rgba(246, 246, 246, 1) 13%,
-    rgba(255, 255, 255, 1) 60%,
-    rgba(255, 255, 255, 1) 92%,
-    rgba(255, 255, 255, 1) 94%,
-    rgba(255, 255, 255, 1) 99%,
-    rgba(240, 43, 43, 1) 99%,
-    rgba(240, 43, 43, 1) 100%
+  background: linear-gradient(90deg, rgb(255 255 255) 0%, rgb(220 220 220) 1%, rgba(242, 242, 242, 1) 1%, rgba(245, 245, 245, 1) 1%, rgba(246, 246, 246, 1) 13%, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 1) 92%, rgba(255, 255, 255, 1) 94%, rgba(255, 255, 255, 1) 99%, rgb(224 224 224) 99%, rgb(255 255 255) 100%);
   );
 `;
 
@@ -344,7 +332,6 @@ height: 90px;
 
 export const Thead = styled.thead`
 background: rgb(33,35,34);
-background: linear-gradient(180deg, rgba(33,35,34,1) 2%, rgba(33,35,34,1) 3%, rgba(33,35,34,1) 13%, rgba(33,35,34,1) 60%, rgba(33,35,34,1) 87%, rgba(240,43,43,1) 91%, rgba(240,43,43,1) 92%, rgba(240,43,43,1) 100%);
 padding: 3rem;
 color: white;
 `;

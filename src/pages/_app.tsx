@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
           body {
             font-family: "Poppins", sans-serif;
             margin: 0;
-            background-color: #f02b2b;
+            background-color: #ccc3c3;
           }
         `}
       />
