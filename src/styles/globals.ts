@@ -19,15 +19,12 @@ export const Button = styled.button`
   background-color: #d5caac;
   color: black;
   font-weight: bold;
-  height: 30px;
-  min-width: 130px;
-  font-size: 12px;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
   box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
   padding: 0.5rem 1rem;
-  margin: 3px;
-  margin-inline: 10px;
+  margin-inline: 4px;
+  margin-bottom: 10px;
   border: none;
   cursor: pointer;
   z-index: 0;
@@ -115,6 +112,9 @@ export const Nav = styled.div`
   align-items: center;
   padding: 1rem 2rem;
   background-color: #212322;
+  height: fit-content;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(229,49,48,1) 0%, rgba(229,49,48,1) 4%, rgba(33,35,34,1) 4%, rgba(33,35,34,1) 100%);
   color: white;
   font-size: 1.5rem;
   font-weight: 600;
@@ -279,6 +279,8 @@ export const FooterRow = styled.div`
 
 export const FooterContainer = styled.footer`
   background-color: #212322;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(229,49,48,1) 0%, rgba(229,49,48,1) 4%, rgba(33,35,34,1) 4%, rgba(33,35,34,1) 100%);
   padding: 45px 0 20px;
   font-size: 15px;
   line-height: 24px;
@@ -364,4 +366,57 @@ export const TeamRow = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+`;
+
+
+export const CardForm = styled.div`
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  color: #212322;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  margin: auto;
+  width: fit-content;
+  border-bottom: 8px solid #212322;
+  border-top: 8px solid #212322;
+  height: fit-content;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
+`;
+
+export const LabelInput = styled.div`
+color: #212322;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  margin-bottom: 1rem;
+`;
+
+export const Input = styled.input`
+margin-left: 1rem;
+  color: #212322;
+  border: none;
+  font-size: 1rem;
+  background: transparent;
+
+ &:autofill {
+    -webkit-box-shadow: 0 0 0 30px #ffff inset;
+    -webkit-text-fill-color: #212322;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: #ffffff;
+  }
+
+ 
+}
 `;
