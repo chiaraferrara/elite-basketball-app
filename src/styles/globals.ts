@@ -362,6 +362,4 @@ export const Td = styled.td`
 
 export const Th =   styled.th`
   padding: 1rem;
-
- 
 `;
