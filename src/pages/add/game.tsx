@@ -9,6 +9,7 @@ export default function Game() {
   const [team1Points, setTeam1Points] = useState<any>(0);
   const [team2Points, setTeam2Points] = useState<any>(0);
   const [date, setDate] = useState<Date | undefined>(undefined);
+  const [playedGames, setPlayedGames] = useState<Number>(1);
   const { setUpdate } = useContext(Context);
   const getTeams = async () => {
     const response = await fetch("/api/teams");
