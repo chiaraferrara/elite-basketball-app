@@ -4,6 +4,7 @@ import Navbar from "@/pages/components/Navbar";
 import { Global, css } from "@emotion/react";
 import GamesList from "./components/GamesList";
 import Footer from "./components/Footer";
+import { MinHeight } from "@/styles/globals";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -18,20 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}
       />
-      {/* background: rgb(36, 36, 36);
-            background: linear-gradient(
-              120deg,
-              rgba(36, 36, 36, 1) 0%,
-              rgba(86, 37, 36, 1) 10%,
-              rgba(178, 38, 37, 1) 30%,
-              rgba(183, 38, 37, 1) 50%,
-              rgba(174, 38, 37, 1) 70%,
-              rgba(110, 37, 36, 1) 90%,
-              rgba(53, 36, 36, 1) 100%
-            ); */}
       <ContextProvider>
         <Navbar />
-        <Component {...pageProps} />
+        <MinHeight>
+          <Component {...pageProps} />
+        </MinHeight>
         <Footer />
       </ContextProvider>
     </>

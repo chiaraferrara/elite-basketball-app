@@ -1,4 +1,4 @@
-import { LeaderboardRow, Table, Td, Thead, Tr } from "@/styles/globals";
+import { LeaderboardRow, Table, Td, Th, Thead, Tr } from "@/styles/globals";
 import { TableBody, TableHead, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -49,11 +49,11 @@ export default function Leaderboard() {
         <Table>
           <Thead>
             <Tr>
-              <th>Position</th>
+              <Th>Position</Th>
 
-              <th>Team</th>
-              <th>PS</th>
-              <th>Points</th>
+              <Th>Team</Th>
+              <Th>PS</Th>
+              <Th>Points</Th>
             </Tr>
           </Thead>
           <TableBody>
