@@ -357,6 +357,7 @@ export const Td = styled.td`
     font-weight: bold;
     height:50px;
     font-size: 1.2rem;
+    
   }
 `;
 
