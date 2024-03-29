@@ -9,6 +9,10 @@ export const globalStyles = css`
   }
 `;
 
+export const MinHeight = styled.div`
+  min-height: 40vh;
+`;
+
 export const Button = styled.button`
   position: relative;
   overflow: hidden;
@@ -101,6 +105,7 @@ export const Row = styled.div`
 
 export const PlayerName = styled.h3`
   font-size: 0.8rem;
+  text-transform: capitalize;
 `;
 
 export const Nav = styled.div`
@@ -268,6 +273,7 @@ export const TeamName = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100px;
+  text-transform: uppercase;
 `;
 
 export const DateRow = styled.p`
@@ -291,6 +297,10 @@ export const FooterContainer = styled.footer`
   line-height: 24px;
   color: white;
   box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
+  position: relative;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  bottom: 0px;
 `;
 
 export const Logos = styled.img`
@@ -340,5 +350,9 @@ color: white;
 `;
 
 export const Td = styled.td`
+  padding: 1rem;
+`;
+
+export const Th =   styled.th`
   padding: 1rem;
 `;

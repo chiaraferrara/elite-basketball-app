@@ -28,7 +28,14 @@ export default function Footer() {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-md-8 col-sm-6 col-xs-12">
+            <div
+              style={{
+                display: "flex",
+                flexFlow: "row wrap",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <a target="_blank" href="https://nextjs.org/">
                 <Logos src={NextLogo.src} />
               </a>
