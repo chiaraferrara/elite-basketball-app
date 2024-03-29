@@ -310,12 +310,12 @@ export const Logos = styled.img`
 
 export const LeaderboardRow = styled.div`
   font-size: 1.8rem;
+  overflow-x:auto;
 `;
 
 export const Table = styled.table`
-width: 80%;
   border-collapse: collapse;
-  margin: 0 auto;
+   margin: 0 auto;
   margin-top: 1rem;
   margin-bottom: 7rem;
   background-color: #f7f7f7;
@@ -352,13 +352,6 @@ color: white;
 export const Td = styled.td`
   padding: 1rem; 
   transition: all 0.3s ease;
-  
-  &:hover {
-    font-weight: bold;
-    height:50px;
-    font-size: 1.2rem;
-    
-  }
 `;
 
 export const Th =   styled.th`
