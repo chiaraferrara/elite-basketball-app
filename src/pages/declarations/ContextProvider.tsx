@@ -77,7 +77,7 @@ export default function ContextProvider({ children }: Props) {
       const teamRes = await fetch(`/api/team/${id}`);
       const teamData = await teamRes.json();
 
-      console.log("GIOCATORI", playerData);
+      // console.log("GIOCATORI", playerData);
       teamData[0].players = playerData.filter(
         (player: any) => player.team_id === id
       );
