@@ -420,3 +420,30 @@ margin-left: 1rem;
  
 }
 `;
+
+
+export const Select = styled.select`
+cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  color: #212322;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 0.5rem;
+  background-color: #fff;
+  border: none;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 1.5em;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  `;

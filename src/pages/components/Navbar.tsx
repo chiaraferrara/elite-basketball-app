@@ -52,13 +52,15 @@ const Navbar = () => {
               <Button>Add Players</Button>
             </Link>
 
-            <Button
-              onClick={() => {
-                onClickLogout();
-              }}
-            >
-              Logout
-            </Button>
+            <Link href="/">
+              <Button
+                onClick={() => {
+                  onClickLogout();
+                }}
+              >
+                Logout
+              </Button>
+            </Link>
           </>
         )}
       </Nav>
