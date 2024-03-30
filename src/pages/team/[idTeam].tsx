@@ -5,6 +5,7 @@ import { Team } from "../declarations/declarations";
 import Link from "next/link";
 import {
   Button,
+  Input,
   PlayerName,
   PointsDetail,
   PreviewPic,
@@ -14,12 +15,26 @@ import {
   Wrapper,
 } from "@/styles/globals";
 import GamesList from "../components/GamesList";
+import { Box, Modal, Typography } from "@mui/material";
 
 export default function Team() {
   const { fetchTeam } = useContext(Context);
   const [team, setTeam] = useState<any>();
   const [loading, setLoading] = useState(true);
   const { isLogged, setIsLogged } = useContext(Context);
+
+  //una volta che aggiorno il team devo fare un fetch per aggiornare i dati
+  const [update, setUpdate] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  // new team fields
+
+  const [name, setName] = useState("");
+  const [logo, setLogo] = useState("");
+  const [coach, setCoach] = useState("");
 
   const router = useRouter();
   const { idTeam } = router.query;
@@ -30,6 +45,10 @@ export default function Team() {
     try {
       const fetchedTeam = await fetchTeam(teamId);
       setTeam(fetchedTeam);
+      setName(fetchedTeam[0].name);
+      setCoach(fetchedTeam[0].coach);
+      setLogo(fetchedTeam[0].logo);
+
       localStorage.setItem("team", JSON.stringify(fetchedTeam));
     } catch (error) {
       console.error("Errore:", error);
@@ -48,11 +67,43 @@ export default function Team() {
     return null;
   };
 
+  const editTeam = async () => {
+    try {
+      const response = await fetch(`/api/team/${teamId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          logo: logo,
+          coach: coach,
+          team_id: teamId,
+        }),
+      });
+      if (response.ok) {
+        //l'update mi serve per fare il refresh dei dati
+        setUpdate(!update);
+        handleClose();
+      } else {
+        console.error("Didn't update team");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    // const data = await response.json();
+    // console.log(data);
+  };
+
   useEffect(() => {
     const loadTeam = async () => {
       const lsTeam = loadTeamFromLocalStorage();
-      if (lsTeam) {
+      if (lsTeam && !update) {
         setTeam(lsTeam);
+        //se voglio modificare è più comodo avere i dati in uno stato già, quindi nell'input già ritrovo i dati (value = {name} ecc...)
+        setName(lsTeam[0].name);
+        setCoach(lsTeam[0].coach);
+        setLogo(lsTeam[0].logo);
         setLoading(false);
       } else {
         await fetchDataFromAPI();
@@ -62,7 +113,7 @@ export default function Team() {
     if (idTeam) {
       loadTeam();
     }
-  }, [idTeam]);
+  }, [idTeam, update]); //ogni volta che modifico, devono rifare il fetch
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -71,6 +122,18 @@ export default function Team() {
   if (!team) {
     return <h1>Team not found</h1>;
   }
+
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <div>
@@ -123,13 +186,77 @@ export default function Team() {
         </RowWrap>{" "}
         {isLogged ? (
           <>
-            <Button>Edit Team</Button>
+            <Button onClick={handleOpen}>Edit Team</Button>
             <Button>Delete Team</Button>
           </>
         ) : (
           <></>
         )}
       </Wrapper>
+
+      {/* update modal */}
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Edit the team
+          </Typography>
+          <hr />
+          <form
+            method="post"
+            onSubmit={(event) => {
+              event.preventDefault();
+              editTeam();
+              setName("");
+              setCoach("");
+              setLogo("");
+            }}
+          >
+            <div>
+              <legend>Team Name:</legend>
+              <Input
+                type="text"
+                id="teamName"
+                name="teamName"
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <legend>Coach:</legend>
+              <Input
+                type="text"
+                id="coach"
+                name="coach"
+                value={coach}
+                onChange={(event) => {
+                  setCoach(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <legend>Logo:</legend>
+              <Input
+                type="text"
+                id="logo"
+                name="logo"
+                value={logo}
+                onChange={(event) => {
+                  setLogo(event.target.value);
+                }}
+              />
+            </div>
+            <Button type="submit">Edit</Button>
+          </form>
+        </Box>
+      </Modal>
     </div>
   );
 }
