@@ -10,7 +10,7 @@ export const globalStyles = css`
 `;
 
 export const MinHeight = styled.div`
-  min-height: 40vh;
+  min-height: 60vh;
 `;
 
 export const Button = styled.button`
@@ -116,7 +116,7 @@ export const Nav = styled.div`
   background: rgb(255,255,255);
   background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(229,49,48,1) 0%, rgba(229,49,48,1) 4%, rgba(33,35,34,1) 4%, rgba(33,35,34,1) 100%);
   color: white;
-  font-size: 1.5rem;
+  font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.1rem;
   box-shadow: 0 2px 20px 0px rgb(0 0 0 / 68%);
@@ -132,8 +132,8 @@ export const Nav = styled.div`
 `;
 
 export const Img = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
 `;
 
 export const ContactWrapper = styled.div`

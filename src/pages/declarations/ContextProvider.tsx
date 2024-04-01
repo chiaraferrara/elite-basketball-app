@@ -118,6 +118,15 @@ export default function ContextProvider({ children }: Props) {
     }
   };
 
+  const checkIsLogged = async () => {
+    const logged = localStorage.getItem("isLogged");
+    if (logged) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  };
+
   return (
     <Context.Provider
       value={{

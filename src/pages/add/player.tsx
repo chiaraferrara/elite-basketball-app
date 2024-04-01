@@ -7,7 +7,8 @@ import {
   TeamGameColumn,
 } from "@/styles/globals";
 import { Typography } from "@mui/material";
-import { use, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
+import { Context } from "../declarations/ContextProvider";
 
 export default function Player() {
   const [playerName, setPlayerName] = useState("");
@@ -15,6 +16,8 @@ export default function Player() {
   const [picSrc, setPicSrc] = useState("");
   const [team_id, setTeam_id] = useState("");
   const [teams, setTeams] = useState<any>([]);
+
+  const { setIsLogged, isLogged } = useContext(Context);
 
   const getTeams = async () => {
     const response = await fetch("/api/teams");
@@ -52,7 +55,23 @@ export default function Player() {
 
   useEffect(() => {
     getTeams();
+    const logged = localStorage.getItem("isLogged");
+    if (logged) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
   }, []);
+
+  //controllo sul login
+
+  if (!isLogged) {
+    return (
+      <TeamGameColumn>
+        <h1>Log in to add a player</h1>
+      </TeamGameColumn>
+    );
+  }
 
   return (
     <>
