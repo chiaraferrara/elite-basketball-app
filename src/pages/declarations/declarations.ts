@@ -28,5 +28,7 @@ export interface Player {
     setGames: (value: any) => void;
     update: boolean;
     setUpdate: (value: boolean) => void;
+    updateLeaderboard : boolean;
+    setUpdateLeaderboard: (value: boolean) => void;
   }
    

@@ -2,11 +2,13 @@ import { LeaderboardRow, Table, Td, Th, Thead, Tr } from "@/styles/globals";
 import { TableBody, TableHead, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../declarations/ContextProvider";
 
 export default function Leaderboard() {
   const [teams, setTeams] = useState<any>([]);
   const router = useRouter();
+  const { updateLeaderboard } = useContext(Context);
 
   const onClickTeam = (team_id: any) => {
     router.push(`/team/${team_id}`);
@@ -36,7 +38,8 @@ export default function Leaderboard() {
     };
 
     fetchData();
-  }, []);
+    console.log("updateLeaderboard", updateLeaderboard);
+  }, [updateLeaderboard]);
 
   return (
     <>
