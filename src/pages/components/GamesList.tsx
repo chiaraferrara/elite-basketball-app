@@ -92,67 +92,77 @@ export default function GamesList() {
     return `${day}/${month}/${year}`;
   };
 
-  const gamesToDisplay = games ? games.slice().reverse().slice(0, 4) : [];
+  const gamesToDisplay = games
+    ? games
+        .slice()
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 4)
+    : [];
 
   if (loading) return <GamesRow>Loading games...</GamesRow>;
   return (
-    <GamesRow>
-      {gamesToDisplay?.map((game: any) => (
-        <div key={game.id}>
-          <DateRow>{formatDate(game.date)}</DateRow>
-          <GameWrapper>
-            <TeamGameColumn>
-              <span>
-                <PreviewPic src={game.home_team.logo} />
-              </span>
-              <TeamName>{game.home_team.name}</TeamName>
-              <p> {game.team1_points}</p>
-            </TeamGameColumn>
-            <br />
-            <p>vs</p>{" "}
-            <TeamGameColumn>
-              <span>
-                <PreviewPic src={game.away_team.logo} />
-              </span>
-              <TeamName>{game.away_team.name}</TeamName>
-              <p> {game.team2_points}</p>{" "}
-            </TeamGameColumn>
-          </GameWrapper>
-          {isLogged ? (
-            <PageButton
-              onClick={() => {
-                updateTeamPoints(
-                  game.id_team1,
-                  game.id_team1,
-                  game.id_team2,
-                  game.team1_points,
-                  game.team2_points,
-                  false
-                )
-                  .then(() => {
-                    updateTeamPoints(
-                      game.id_team2,
-                      game.id_team1,
-                      game.id_team2,
-                      game.team1_points,
-                      game.team2_points,
-                      false
-                    );
-                  })
-                  .then(() => {
-                    setUpdateLeaderboard(!updateLeaderboard);
-                  });
-                onClickDelete(game.id_game);
-              }}
-              type="button"
-            >
-              delete
-            </PageButton>
-          ) : (
-            <></>
-          )}
-        </div>
-      ))}
-    </GamesRow>
+    <>
+      {gamesToDisplay.length >= 1 && (
+        <h1 style={{ textAlign: "center" }}> Latest games </h1>
+      )}
+      <GamesRow>
+        {gamesToDisplay?.map((game: any) => (
+          <div key={game.id}>
+            <DateRow>{formatDate(game.date)}</DateRow>
+            <GameWrapper>
+              <TeamGameColumn>
+                <span>
+                  <PreviewPic src={game.home_team.logo} />
+                </span>
+                <TeamName>{game.home_team.name}</TeamName>
+                <p> {game.team1_points}</p>
+              </TeamGameColumn>
+              <br />
+              <p>vs</p>{" "}
+              <TeamGameColumn>
+                <span>
+                  <PreviewPic src={game.away_team.logo} />
+                </span>
+                <TeamName>{game.away_team.name}</TeamName>
+                <p> {game.team2_points}</p>{" "}
+              </TeamGameColumn>
+            </GameWrapper>
+            {isLogged ? (
+              <PageButton
+                onClick={() => {
+                  updateTeamPoints(
+                    game.id_team1,
+                    game.id_team1,
+                    game.id_team2,
+                    game.team1_points,
+                    game.team2_points,
+                    false
+                  )
+                    .then(() => {
+                      updateTeamPoints(
+                        game.id_team2,
+                        game.id_team1,
+                        game.id_team2,
+                        game.team1_points,
+                        game.team2_points,
+                        false
+                      );
+                    })
+                    .then(() => {
+                      setUpdateLeaderboard(!updateLeaderboard);
+                    });
+                  onClickDelete(game.id_game);
+                }}
+                type="button"
+              >
+                delete
+              </PageButton>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
+      </GamesRow>
+    </>
   );
 }
