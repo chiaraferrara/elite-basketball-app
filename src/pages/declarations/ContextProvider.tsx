@@ -13,6 +13,8 @@ export const Context = createContext<TContext>({
   setGames: () => {},
   update: false,
   setUpdate: () => {},
+  updateLeaderboard: false,
+  setUpdateLeaderboard: () => {},
 });
 
 interface Props {
@@ -25,6 +27,7 @@ export default function ContextProvider({ children }: Props) {
   const [isLogged, setIsLogged] = useState(false);
   const [games, setGames] = useState<any[]>([]);
   const [update, setUpdate] = useState(false); //per fare il refresh dei games
+  const [updateLeaderboard, setUpdateLeaderboard] = useState(false);
 
   //questo mi ritorna i team
   const fetchTeams = async () => {
@@ -141,6 +144,8 @@ export default function ContextProvider({ children }: Props) {
         setGames,
         update,
         setUpdate,
+        updateLeaderboard,
+        setUpdateLeaderboard,
       }}
     >
       {children}

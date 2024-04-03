@@ -12,7 +12,6 @@ import {
   TeamGameColumn,
   TeamName,
 } from "@/styles/globals";
-import deleteIcon from "../../assets/delete.png";
 
 export default function GamesList() {
   const [loading, setLoading] = useState(true);
@@ -20,6 +19,50 @@ export default function GamesList() {
   const { games, setGames } = useContext(Context);
   const { update } = useContext(Context);
   const { isLogged } = useContext(Context);
+  const { updateLeaderboard, setUpdateLeaderboard } = useContext(Context);
+
+  const patchTeam = async (
+    team_id: any,
+    points_scored: number,
+    points_given: number,
+    total_points: number,
+    played_games: number,
+    sum: boolean
+  ) => {
+    const response = await fetch(`/api/team/${team_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        points_scored: points_scored,
+        points_given: points_given,
+        total_points: total_points,
+        played_games: played_games,
+        sum: sum,
+      }),
+    });
+    const data = await response.json();
+  };
+
+  const updateTeamPoints = async (
+    team_id: any,
+    id_team1: any,
+    id_team2: any,
+    points_team1: any,
+    points_team2: any,
+    sum: boolean
+  ) => {
+    if (team_id == id_team1 && points_team1 > points_team2) {
+      patchTeam(id_team1, points_team1, points_team2, 2, 1, sum);
+    } else if (team_id == id_team2 && points_team2 > points_team1) {
+      patchTeam(id_team2, points_team2, points_team1, 2, 1, sum);
+    } else if (team_id == id_team1 && points_team1 < points_team2) {
+      patchTeam(id_team1, points_team1, points_team2, 0, 1, sum);
+    } else if (team_id == id_team2 && points_team2 < points_team1) {
+      patchTeam(id_team2, points_team2, points_team1, 0, 1, sum);
+    }
+  };
 
   const onClickDelete = async (game_id: any) => {
     const response = await fetch(`/api/game/${game_id}`, {
@@ -33,9 +76,9 @@ export default function GamesList() {
   };
 
   useEffect(() => {
-    fetchGames().then(() => setLoading(false));
-    const recentGames = games.reverse().slice(0, 4);
-    setGames(recentGames);
+    fetchGames().then(() => {
+      setLoading(false);
+    });
   }, [update, loading]);
 
   //metodo per formattare la data da "2024-03-13T23:00:00.000Z" a "13/03/2024"
@@ -49,10 +92,12 @@ export default function GamesList() {
     return `${day}/${month}/${year}`;
   };
 
+  const gamesToDisplay = games ? games.slice().reverse().slice(0, 4) : [];
+
   if (loading) return <GamesRow>Loading games...</GamesRow>;
   return (
     <GamesRow>
-      {games?.map((game: any) => (
+      {gamesToDisplay?.map((game: any) => (
         <div key={game.id}>
           <DateRow>{formatDate(game.date)}</DateRow>
           <GameWrapper>
@@ -76,6 +121,27 @@ export default function GamesList() {
           {isLogged ? (
             <PageButton
               onClick={() => {
+                updateTeamPoints(
+                  game.id_team1,
+                  game.id_team1,
+                  game.id_team2,
+                  game.team1_points,
+                  game.team2_points,
+                  false
+                )
+                  .then(() => {
+                    updateTeamPoints(
+                      game.id_team2,
+                      game.id_team1,
+                      game.id_team2,
+                      game.team1_points,
+                      game.team2_points,
+                      false
+                    );
+                  })
+                  .then(() => {
+                    setUpdateLeaderboard(!updateLeaderboard);
+                  });
                 onClickDelete(game.id_game);
               }}
               type="button"

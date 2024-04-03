@@ -30,7 +30,8 @@ export default function Game() {
     points_scored: number,
     points_given: number,
     total_points: number,
-    played_games: number
+    played_games: number,
+    sum: boolean
   ) => {
     const response = await fetch(`/api/team/${team_id}`, {
       method: "PATCH",
@@ -42,6 +43,7 @@ export default function Game() {
         points_given: points_given,
         total_points: total_points,
         played_games: played_games,
+        sum: sum,
       }),
     });
     const data = await response.json();
@@ -50,22 +52,28 @@ export default function Game() {
   const updateTeamPoints = async (
     team_id: any,
     points_team1: any,
-    points_team2: any
+    points_team2: any,
+    sum: boolean
   ) => {
     if (team_id == id_team1 && points_team1 > points_team2) {
-      patchTeam(team_id, points_team1, points_team2, 2, 1);
+      patchTeam(team_id, points_team1, points_team2, 2, 1, sum);
     } else if (team_id == id_team2 && points_team2 > points_team1) {
-      patchTeam(team_id, points_team2, points_team1, 2, 1);
+      patchTeam(team_id, points_team2, points_team1, 2, 1, sum);
     } else if (team_id == id_team1 && points_team1 < points_team2) {
-      patchTeam(team_id, points_team1, points_team2, 0, 1);
+      patchTeam(team_id, points_team1, points_team2, 0, 1, sum);
     } else if (team_id == id_team2 && points_team2 < points_team1) {
-      patchTeam(team_id, points_team2, points_team1, 0, 1);
+      patchTeam(team_id, points_team2, points_team1, 0, 1, sum);
     }
   };
 
   const addGameToDB = async (event: any) => {
     event.preventDefault();
-    if (id_team1 != id_team2) {
+    if (
+      id_team1 != id_team2 &&
+      date != undefined &&
+      team1Points != 0 &&
+      team2Points != 0
+    ) {
       const response = await fetch("/api/games", {
         method: "POST",
         headers: {
@@ -82,7 +90,7 @@ export default function Game() {
 
       const data = await response.json();
     } else {
-      alert("Select different teams");
+      alert("Select different teams or fill all the fields");
     }
     setUpdate(true);
   };
@@ -121,12 +129,15 @@ export default function Game() {
             method="post"
             onSubmit={async (event) => {
               addGameToDB(event);
-              updateTeamPoints(id_team1, team1Points, team2Points).then(() => {
-                updateTeamPoints(id_team2, team1Points, team2Points);
-                setTeam1Points(0);
-                setTeam2Points(0);
-                setDate(undefined);
-              });
+              updateTeamPoints(id_team1, team1Points, team2Points, true).then(
+                () => {
+                  setUpdate(true);
+                  updateTeamPoints(id_team2, team1Points, team2Points, true);
+                  setTeam1Points(0);
+                  setTeam2Points(0);
+                  setDate(undefined);
+                }
+              );
             }}
           >
             <div>
