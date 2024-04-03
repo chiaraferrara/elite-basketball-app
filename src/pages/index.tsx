@@ -21,17 +21,7 @@ export default function Home() {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}> Latest games </h1>
       <GamesList />
-      {/* <h1>Teams</h1> */}
-      {/* {teams.map((team: any) => (
-        <div key={team.id}>
-          <img src={team.logo} alt="team logo" />
-          <h1>{team.name}</h1>
-          <Link href={`team/${team.team_id}`}>Go to team page</Link>
-          <br />
-        </div>
-      ))} */}
       <Leaderboard />
     </>
   );

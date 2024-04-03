@@ -95,13 +95,19 @@ export default function Games() {
     return `${day}/${month}/${year}`;
   };
 
+  const gamesToDisplay = games
+    ? games.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      )
+    : [];
+
   if (loading) return <GamesRow>Loading games...</GamesRow>;
 
   return (
     <>
       <h1 style={{ textAlign: "center" }}>League games</h1>
       <GamesRow>
-        {games?.map((game: any) => (
+        {gamesToDisplay?.map((game: any) => (
           <div key={game.id}>
             <DateRow>{formatDate(game.date)}</DateRow>
             <GameWrapper>
