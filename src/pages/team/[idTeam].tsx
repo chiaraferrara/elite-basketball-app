@@ -95,11 +95,24 @@ export default function Team() {
     // console.log(data);
   };
 
+  const onClickDelete = async () => {
+    const response = await fetch(`/api/team/${teamId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      setLoading(true);
+      router.push("/teams");
+    }
+    const data = await response.json();
+    console.log(data);
+  };
+
   useEffect(() => {
     const loadTeam = async () => {
       const lsTeam = loadTeamFromLocalStorage();
       if (lsTeam && !update) {
         setTeam(lsTeam);
+        console.log(lsTeam);
         //se voglio modificare è più comodo avere i dati in uno stato già, quindi nell'input già ritrovo i dati (value = {name} ecc...)
         setName(lsTeam[0].name);
         setCoach(lsTeam[0].coach);
@@ -187,7 +200,7 @@ export default function Team() {
         {isLogged ? (
           <>
             <Button onClick={handleOpen}>Edit Team</Button>
-            <Button>Delete Team</Button>
+            <Button onClick={onClickDelete}>Delete Team</Button>
           </>
         ) : (
           <></>
