@@ -1,6 +1,7 @@
 import { CardForm, Input, PageButton, TeamGameColumn } from "@/styles/globals";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
+import { useRouter } from "next/router";
 
 export default function Team() {
   const [teamName, setTeamName] = useState("");
@@ -10,6 +11,8 @@ export default function Team() {
   const [points_scored, setPointsScored] = useState(0);
   const [total_points, setTotalPoints] = useState(0);
   const { setIsLogged, isLogged } = useContext(Context);
+
+  const router = useRouter();
 
   const addTeamtoDB = async (event: any) => {
     if (!teamName || !coachName || !logoSrc) {
@@ -72,6 +75,7 @@ export default function Team() {
               setTeamName("");
               setCoachName("");
               setLogoSrc("");
+              router.push("/teams");
             }}
           >
             <div>
