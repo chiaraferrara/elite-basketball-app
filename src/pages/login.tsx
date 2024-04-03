@@ -43,7 +43,6 @@ export default function login() {
           style={{ display: "flex", flexFlow: "column wrap", padding: "40px" }}
           onSubmit={async (event) => {
             await authentication(event);
-            setIsLogged(true);
           }}
         >
           <LabelInput>
