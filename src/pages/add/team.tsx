@@ -69,6 +69,9 @@ export default function Team() {
             onSubmit={(event) => {
               event.preventDefault();
               addTeamtoDB(event);
+              setTeamName("");
+              setCoachName("");
+              setLogoSrc("");
             }}
           >
             <div>

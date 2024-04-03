@@ -18,6 +18,7 @@ export default function Player() {
   const [teams, setTeams] = useState<any>([]);
 
   const { setIsLogged, isLogged } = useContext(Context);
+  const { update, setUpdate } = useContext(Context);
 
   const getTeams = async () => {
     const response = await fetch("/api/teams");
@@ -49,6 +50,7 @@ export default function Player() {
       });
 
       const data = await response.json();
+      localStorage.removeItem("team");
       console.log(data);
     }
   };
