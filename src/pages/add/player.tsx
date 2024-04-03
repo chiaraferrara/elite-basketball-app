@@ -9,6 +9,7 @@ import {
 import { Typography } from "@mui/material";
 import { use, useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
+import { useRouter } from "next/router";
 
 export default function Player() {
   const [playerName, setPlayerName] = useState("");
@@ -16,6 +17,8 @@ export default function Player() {
   const [picSrc, setPicSrc] = useState("");
   const [team_id, setTeam_id] = useState("");
   const [teams, setTeams] = useState<any>([]);
+
+  const router = useRouter();
 
   const { setIsLogged, isLogged } = useContext(Context);
   const { update, setUpdate } = useContext(Context);
@@ -95,6 +98,7 @@ export default function Player() {
                 setAge("");
                 setPlayerName("");
                 setPicSrc("");
+                router.push(`/team/${team_id}`);
               }}
             >
               <div>
