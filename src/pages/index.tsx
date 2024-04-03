@@ -21,6 +21,7 @@ export default function Home() {
 
   return (
     <>
+      <h1 style={{ textAlign: "center" }}> Latest games </h1>
       <GamesList />
       {/* <h1>Teams</h1> */}
       {/* {teams.map((team: any) => (
