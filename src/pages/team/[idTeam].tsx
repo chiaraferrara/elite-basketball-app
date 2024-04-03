@@ -107,6 +107,17 @@ export default function Team() {
     console.log(data);
   };
 
+  const deletePlayers = async (player_id: any) => {
+    const response = await fetch(`/api/player/${player_id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log("Players deleted");
+    }
+    const data = await response.json();
+    console.log(data);
+  };
+
   useEffect(() => {
     const loadTeam = async () => {
       const lsTeam = loadTeamFromLocalStorage();
@@ -200,7 +211,21 @@ export default function Team() {
         {isLogged ? (
           <>
             <Button onClick={handleOpen}>Edit Team</Button>
-            <Button onClick={onClickDelete}>Delete Team</Button>
+            <Button
+              onClick={async () => {
+                if (team && team[0] && team[0].players) {
+                  //promise.all mi permette di fare un array di promise e aspettare che tutte le promise siano risolte
+                  await Promise.all(
+                    team[0].players.map(async (player: any) => {
+                      await deletePlayers(player.player_id);
+                    })
+                  );
+                  onClickDelete();
+                }
+              }}
+            >
+              Delete Team
+            </Button>
           </>
         ) : (
           <></>
