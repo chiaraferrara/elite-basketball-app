@@ -30,4 +30,14 @@ export default async function handler(req: any, res: any) {
     );
     res.status(200).json(player);
   }
+
+
+  if (req.method === "PATCH") {
+    const { picture, name, age, player_id} = req.body;
+    const player = await executeQuery(
+      "UPDATE players SET name = ? , picture = ?, age = ? WHERE player_id = ?",
+      [ name,picture, age, player_id]
+    );
+    res.status(200).json(player);
+  }
 }
