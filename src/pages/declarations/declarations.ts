@@ -8,7 +8,8 @@ export interface Team {
 }
 
 export interface Player {
-  id: number;
+  player_id: number;
+  picture: string;
   name: string;
   age: number;
   team: string;
@@ -18,7 +19,9 @@ export interface Player {
 
   export interface TContext {
     players: Player[];
+    setPlayers: (value: Player[]) => void;
     teams: Team[];
+    fetchPlayers: () => Promise<Player[]>;
     fetchPlayersAndTeams: () => Promise<{ teams: any }>;
     fetchTeam : (id: number) => Promise<any>;
     isLogged: boolean;
