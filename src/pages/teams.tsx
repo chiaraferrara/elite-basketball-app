@@ -56,7 +56,7 @@ export default function Teams() {
                 alt="basketball"
               />
             </div>
-            <p>Unfortunately there's no teams to display.</p>
+            <p>Unfortunately there&rsquo;s no teams to display.</p>
           </div>
         </CardForm>
       )}

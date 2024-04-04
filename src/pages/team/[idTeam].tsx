@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
-import { Team } from "../declarations/declarations";
 import Link from "next/link";
 import {
   Button,

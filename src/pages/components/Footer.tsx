@@ -15,11 +15,11 @@ export default function Footer() {
             <div className="col-sm-12 col-md-6">
               <h2 style={{ margin: "20px" }}>About</h2>
               <p style={{ margin: "20px" }}>
-                Elite Basketball è l'applicazione web che consente ai moderatori
-                di gestire un torneo di basket in modo efficace, semplice ed
-                intuitivo, e consente ai giocatori di visualizzare nel dettaglio
-                i dati delle proprie squadre e dei giocatori partecipanti al
-                torneo.
+                Elite Basketball è l&rsquo;applicazione web che consente ai
+                moderatori di gestire un torneo di basket in modo efficace,
+                semplice ed intuitivo, e consente ai giocatori di visualizzare
+                nel dettaglio i dati delle proprie squadre e dei giocatori
+                partecipanti al torneo.
               </p>
             </div>
             <Contacts />
