@@ -132,8 +132,8 @@ export const Nav = styled.div`
 `;
 
 export const Img = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 290px;
+  height: 290px;
 `;
 
 export const ContactWrapper = styled.div`
