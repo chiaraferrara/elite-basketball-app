@@ -1,21 +1,17 @@
-import Link from "next/link";
-import { Player, Team } from "./declarations/declarations";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./declarations/ContextProvider";
-import { CardForm, TeamDiv, TeamImg, TeamRow } from "@/styles/globals";
+import { CardForm } from "@/styles/globals";
+import sadFace from "../assets/sad.svg";
+import basketBall from "../assets/basketball.svg";
 import {
-  Button,
   DateRow,
   GameWrapper,
   GamesRow,
   PageButton,
-  PlayerName,
   PreviewPic,
-  Row,
   TeamGameColumn,
   TeamName,
 } from "@/styles/globals";
-import GamesList from "./components/GamesList";
 
 export default function Games() {
   const [loading, setLoading] = useState(true);
@@ -170,7 +166,28 @@ export default function Games() {
       ) : (
         <>
           <CardForm>
-            <p>Unfortunately there's no game to display.</p>
+            <div
+              style={{
+                display: "flex",
+                flexFlow: "column",
+                textAlign: "center",
+              }}
+            >
+              <div>
+                {" "}
+                <img
+                  style={{ width: "40px" }}
+                  src={sadFace.src}
+                  alt="sad face"
+                />
+                <img
+                  style={{ width: "40px" }}
+                  src={basketBall.src}
+                  alt="basketball"
+                />
+              </div>
+              <p>Unfortunately there's no game to display.</p>
+            </div>
           </CardForm>
         </>
       )}

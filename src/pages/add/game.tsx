@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
-import GamesList from "../components/GamesList";
 import {
   CardForm,
   Input,
@@ -117,7 +116,7 @@ export default function Game() {
   }
   return (
     <>
-      <GamesList />
+      {/* <GamesList /> */}
       <TeamGameColumn>
         <h1>Add Game</h1>
         <CardForm
