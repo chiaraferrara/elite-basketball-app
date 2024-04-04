@@ -447,3 +447,57 @@ cursor: pointer;
   margin-right: 1rem;
   margin-bottom: 1rem;
   `;
+  export const Page = styled.div `
+    @include center;
+    width:  feat-content ;
+    height: 550px;
+    margin:auto;
+    z-index: 1;
+    font-family: Roboto, sans-serif;
+    background-size: cover;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+    background-blend-mode: color-dodge;
+  `
+  export const Content = styled.div`
+    text-align: center;
+    color: black;
+    
+    
+    h1 {
+      font-weight: 900;
+      font-size: 10em;
+      line-height: 1;
+      margin-bottom: -10px;
+      opacity: 0.6;
+    }
+    
+    h2 {
+      font-weight: 700;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+    
+    
+    a {
+      display: inline-block;
+      font-weight: 300;
+      font-size: 12px;
+      text-transform: uppercase;
+      border: 1px solid #CDD4DE;
+      padding: 8px 14px;
+      border-radius: 4px;
+      opacity: 0.4;
+      cursor: pointer;
+    }
+  `
+  export const NotFoundimg =  styled.img `
+   position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+    transform: scale(1.1);
+  `
