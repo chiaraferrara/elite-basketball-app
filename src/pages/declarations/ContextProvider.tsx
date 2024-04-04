@@ -3,7 +3,9 @@ import { Player, TContext, Team } from "./declarations";
 
 export const Context = createContext<TContext>({
   players: [],
+  setPlayers: () => {},
   teams: [],
+  fetchPlayers: async () => [],
   fetchPlayersAndTeams: async () => ({ teams: [] }),
   fetchTeam: async () => ({}),
   isLogged: false,
@@ -46,6 +48,7 @@ export default function ContextProvider({ children }: Props) {
     try {
       const playerRes = await fetch("/api/players");
       const playerData = await playerRes.json();
+      setPlayers(playerData);
       return playerData;
     } catch (error) {
       console.error("Error", error);
@@ -134,7 +137,9 @@ export default function ContextProvider({ children }: Props) {
     <Context.Provider
       value={{
         players,
+        setPlayers,
         teams,
+        fetchPlayers,
         fetchPlayersAndTeams,
         fetchTeam,
         isLogged,
