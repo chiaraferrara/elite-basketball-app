@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Context } from "./declarations/ContextProvider";
+import { Context } from "../declarations/ContextProvider";
 import { CardForm } from "@/styles/globals";
 import sadFace from "../assets/sad.svg";
 import basketBall from "../assets/basketball.svg";
