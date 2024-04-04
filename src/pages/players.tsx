@@ -207,7 +207,7 @@ export default function PlayersPage() {
                     alt="basketball"
                   />
                 </div>
-                <p>Unfortunately there's no players to display.</p>
+                <p>Unfortunately there&rsquo;s no players to display.</p>
               </div>
             </CardForm>
           </>

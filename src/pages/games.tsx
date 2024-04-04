@@ -186,7 +186,7 @@ export default function Games() {
                   alt="basketball"
                 />
               </div>
-              <p>Unfortunately there's no game to display.</p>
+              <p>Unfortunately there&rsquo;s no game to display.</p>
             </div>
           </CardForm>
         </>
