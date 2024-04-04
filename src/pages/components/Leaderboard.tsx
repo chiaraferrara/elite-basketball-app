@@ -71,12 +71,18 @@ export default function Leaderboard() {
                 <Td style={{ marginLeft: "40px" }}>
                   <Link href={`/team/${team.team_id}`}>{team.name}</Link>
                 </Td>
-                <Td style={{ textAlign: "center" }}>{team.played_games}</Td>
+                <Td style={{ textAlign: "center" }}>
+                  {team.played_games < 0 ? "0" : team.played_games}
+                </Td>
                 {/* partite vinte */}
-                <Td style={{ textAlign: "center" }}>{team.total_points / 2}</Td>
+                <Td style={{ textAlign: "center" }}>
+                  {team.total_points / 2 < 0 ? "0" : team.total_points / 2}
+                </Td>
                 {/* partite perse */}
                 <Td style={{ textAlign: "center" }}>
-                  {team.played_games - team.total_points / 2}
+                  {team.played_games - team.total_points / 2 < 0
+                    ? "0"
+                    : team.played_games - team.total_points / 2}
                 </Td>
                 <Td style={{ textAlign: "center" }}>{team.points_scored}</Td>
                 <Td style={{ textAlign: "center" }}>{team.points_given}</Td>
