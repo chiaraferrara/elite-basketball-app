@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Player, Team } from "./declarations/declarations";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./declarations/ContextProvider";
-import { TeamDiv, TeamImg, TeamRow } from "@/styles/globals";
+import { CardForm, TeamDiv, TeamImg, TeamRow } from "@/styles/globals";
 import {
   Button,
   DateRow,
@@ -15,6 +15,7 @@ import {
   TeamGameColumn,
   TeamName,
 } from "@/styles/globals";
+import GamesList from "./components/GamesList";
 
 export default function Games() {
   const [loading, setLoading] = useState(true);
@@ -106,64 +107,73 @@ export default function Games() {
   return (
     <>
       <h1 style={{ textAlign: "center" }}>League games</h1>
-      <GamesRow>
-        {gamesToDisplay?.map((game: any) => (
-          <div key={game.id}>
-            <DateRow>{formatDate(game.date)}</DateRow>
-            <GameWrapper>
-              <TeamGameColumn>
-                <span>
-                  <PreviewPic src={game.home_team.logo} />
-                </span>
-                <TeamName>{game.home_team.name}</TeamName>
-                <p> {game.team1_points}</p>
-              </TeamGameColumn>
-              <br />
-              <p>vs</p>{" "}
-              <TeamGameColumn>
-                <span>
-                  <PreviewPic src={game.away_team.logo} />
-                </span>
-                <TeamName>{game.away_team.name}</TeamName>
-                <p> {game.team2_points}</p>{" "}
-              </TeamGameColumn>
-            </GameWrapper>
-            {isLogged ? (
-              <PageButton
-                onClick={() => {
-                  updateTeamPoints(
-                    game.id_team1,
-                    game.id_team1,
-                    game.id_team2,
-                    game.team1_points,
-                    game.team2_points,
-                    false
-                  )
-                    .then(() => {
-                      updateTeamPoints(
-                        game.id_team2,
-                        game.id_team1,
-                        game.id_team2,
-                        game.team1_points,
-                        game.team2_points,
-                        false
-                      );
-                    })
-                    .then(() => {
-                      setUpdateLeaderboard(!updateLeaderboard);
-                    });
-                  onClickDelete(game.id_game);
-                }}
-                type="button"
-              >
-                delete
-              </PageButton>
-            ) : (
-              <></>
-            )}
-          </div>
-        ))}
-      </GamesRow>
+
+      {gamesToDisplay.length > 0 ? (
+        <GamesRow>
+          {gamesToDisplay?.map((game: any) => (
+            <div key={game.id}>
+              <DateRow>{formatDate(game.date)}</DateRow>
+              <GameWrapper>
+                <TeamGameColumn>
+                  <span>
+                    <PreviewPic src={game.home_team.logo} />
+                  </span>
+                  <TeamName>{game.home_team.name}</TeamName>
+                  <p> {game.team1_points}</p>
+                </TeamGameColumn>
+                <br />
+                <p>vs</p>{" "}
+                <TeamGameColumn>
+                  <span>
+                    <PreviewPic src={game.away_team.logo} />
+                  </span>
+                  <TeamName>{game.away_team.name}</TeamName>
+                  <p> {game.team2_points}</p>{" "}
+                </TeamGameColumn>
+              </GameWrapper>
+              {isLogged ? (
+                <PageButton
+                  onClick={() => {
+                    updateTeamPoints(
+                      game.id_team1,
+                      game.id_team1,
+                      game.id_team2,
+                      game.team1_points,
+                      game.team2_points,
+                      false
+                    )
+                      .then(() => {
+                        updateTeamPoints(
+                          game.id_team2,
+                          game.id_team1,
+                          game.id_team2,
+                          game.team1_points,
+                          game.team2_points,
+                          false
+                        );
+                      })
+                      .then(() => {
+                        setUpdateLeaderboard(!updateLeaderboard);
+                      });
+                    onClickDelete(game.id_game);
+                  }}
+                  type="button"
+                >
+                  delete
+                </PageButton>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </GamesRow>
+      ) : (
+        <>
+          <CardForm>
+            <p>Unfortunately there's no game to display.</p>
+          </CardForm>
+        </>
+      )}
     </>
   );
 }
