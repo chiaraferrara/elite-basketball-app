@@ -166,7 +166,7 @@ export default function Team() {
         {" "}
         <RowWrap>
           <TeamWrapper>
-            <h1>{team?.[0]?.name}</h1>
+            <h1 style={{ marginTop: "60px" }}>{team?.[0]?.name}</h1>
             <PointsDetail>
               <div style={{ margin: "10px", textAlign: "center" }}>
                 Total Points:

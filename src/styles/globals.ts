@@ -95,8 +95,8 @@ export const PageButton = styled.button`
 export const Row = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
 `;
 
 export const PlayerName = styled.h3`
@@ -194,7 +194,6 @@ export const Wrapper = styled.div`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
 `;
 
 export const TeamWrapper = styled.div`
@@ -203,7 +202,7 @@ export const TeamWrapper = styled.div`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  padding: 1rem 2rem;
   background: rgb(33, 35, 34);
   background: linear-gradient(
     180deg,
