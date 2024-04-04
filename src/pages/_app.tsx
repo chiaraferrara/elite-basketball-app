@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import ContextProvider from "./declarations/ContextProvider";
+import ContextProvider from "../declarations/ContextProvider";
 import Navbar from "@/pages/components/Navbar";
 import { Global, css } from "@emotion/react";
 import GamesList from "./components/GamesList";

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Img, Nav } from "@/styles/globals";
 import Link from "next/link";
-import { Context } from "../declarations/ContextProvider";
+import { Context } from "../../declarations/ContextProvider";
 
 const Navbar = () => {
   const { isLogged, setIsLogged } = useContext(Context);

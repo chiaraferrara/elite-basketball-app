@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Context } from "./declarations/ContextProvider";
+import { Context } from "../declarations/ContextProvider";
 import { useRouter } from "next/router";
 import { AnyARecord } from "dns";
 import {

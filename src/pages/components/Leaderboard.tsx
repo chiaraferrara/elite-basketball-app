@@ -3,7 +3,7 @@ import { TableBody, TableHead, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { Context } from "../declarations/ContextProvider";
+import { Context } from "../../declarations/ContextProvider";
 
 export default function Leaderboard() {
   const [teams, setTeams] = useState<any>([]);
