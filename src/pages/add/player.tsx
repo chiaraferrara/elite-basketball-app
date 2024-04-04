@@ -24,9 +24,16 @@ export default function Player() {
   const { update, setUpdate } = useContext(Context);
 
   const getTeams = async () => {
-    const response = await fetch("/api/teams");
-    const data = await response.json();
-    setTeams(data);
+    try {
+      const response = await fetch("/api/teams");
+      if (!response.ok) {
+        throw new Error("Failed to fetch teams");
+      }
+      const data = await response.json();
+      setTeams(data);
+    } catch (error) {
+      console.error("Errore:", error);
+    }
   };
 
   const addPlayerToDB = async (event: any) => {
@@ -90,78 +97,99 @@ export default function Player() {
               width: "fit-content",
             }}
           >
-            <form
-              method="post"
-              onSubmit={(event) => {
-                addPlayerToDB(event);
-                setTeam_id("");
-                setAge("");
-                setPlayerName("");
-                setPicSrc("");
-                router.push(`/team/${team_id}`);
-              }}
-            >
-              <div>
-                <legend>Player Name:</legend>
-                <Input
-                  style={{
-                    marginBottom: "20px",
-                  }}
-                  type="text"
-                  placeholder="Player Name*"
-                  id="playerName"
-                  name="playerName"
-                  value={playerName}
-                  onChange={(event) => {
-                    setPlayerName(event.target.value);
-                    console.log(playerName);
-                  }}
-                />
-              </div>
-              <div>
-                <legend>Age:</legend>
-                <Input
-                  style={{
-                    marginBottom: "20px",
-                  }}
-                  type="number"
-                  placeholder="Age*"
-                  id="age"
-                  name="age"
-                  value={age}
-                  onChange={(event) => setAge(event.target.value)}
-                />
-              </div>
-              <div>
-                <legend>Photo:</legend>
-                <Input
-                  style={{
-                    marginBottom: "20px",
-                  }}
-                  type="text"
-                  placeholder="Photo URL*"
-                  id="picSrc"
-                  name="picSrc"
-                  value={picSrc}
-                  onChange={(event) => setPicSrc(event.target.value)}
-                />
-              </div>
-              <div>
-                <Select
-                  onChange={(event) => {
-                    setTeam_id(event.target.value);
-                  }}
-                >
-                  <option>Select Team*</option>
-                  {teams.map((team: any) => (
-                    <option key={team.team_id} value={team.team_id}>
-                      {team.name}
-                    </option>
-                  ))}
-                </Select>
-              </div>
-              <PageButton type="submit">Add Player</PageButton>
-            </form>
+            {teams.length > 0 ? (
+              <form
+                method="post"
+                onSubmit={(event) => {
+                  addPlayerToDB(event);
+                  setTeam_id("");
+                  setAge("");
+                  setPlayerName("");
+                  setPicSrc("");
+                  router.push(`/team/${team_id}`);
+                }}
+              >
+                <div>
+                  <legend>Player Name:</legend>
+                  <Input
+                    style={{
+                      marginBottom: "20px",
+                    }}
+                    type="text"
+                    placeholder="Player Name*"
+                    id="playerName"
+                    name="playerName"
+                    value={playerName}
+                    onChange={(event) => {
+                      setPlayerName(event.target.value);
+                      console.log(playerName);
+                    }}
+                  />
+                </div>
+                <div>
+                  <legend>Age:</legend>
+                  <Input
+                    style={{
+                      marginBottom: "20px",
+                    }}
+                    type="number"
+                    placeholder="Age*"
+                    id="age"
+                    name="age"
+                    value={age}
+                    onChange={(event) => setAge(event.target.value)}
+                  />
+                </div>
+                <div>
+                  <legend>Photo:</legend>
+                  <Input
+                    style={{
+                      marginBottom: "20px",
+                    }}
+                    type="text"
+                    placeholder="Photo URL*"
+                    id="picSrc"
+                    name="picSrc"
+                    value={picSrc}
+                    onChange={(event) => setPicSrc(event.target.value)}
+                  />
+                </div>
+                <div>
+                  <Select
+                    onChange={(event) => {
+                      setTeam_id(event.target.value);
+                    }}
+                  >
+                    <option>Select Team*</option>
+                    {teams?.map(
+                      (
+                        team: any // Remove unnecessary logical operator '&&'
+                      ) => (
+                        <option key={team.team_id} value={team.team_id}>
+                          {team.name}
+                        </option>
+                      )
+                    )}
+                  </Select>
+                </div>
+                <PageButton type="submit">Add Player</PageButton>
+              </form>
+            ) : (
+              <>
+                <div style={{ display: "flex", flexFlow: "column" }}>
+                  You can add a player once you have teams to associate with.
+                  <br />
+                  Add a team first.
+                  <PageButton
+                    onClick={() => {
+                      router.push("/add/team");
+                    }}
+                  >
+                    Add your team
+                  </PageButton>
+                </div>
+              </>
+            )}
           </CardForm>
         </TeamGameColumn>
       </div>
