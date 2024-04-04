@@ -62,7 +62,7 @@ export const PageButton = styled.button`
   font-size: 12px;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
-  box-shadow: 0 2px 8px 0px rgb(0 0 0 / 25%);
+  box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 25%);
   padding: 0.5rem 1rem;
   margin: 3px;
   margin-inline: 10px;
@@ -102,6 +102,7 @@ export const Row = styled.div`
 export const PlayerName = styled.h3`
   font-size: 0.8rem;
   text-transform: capitalize;
+  margin-inline: 10px;
 `;
 
 export const Nav = styled.div`
@@ -501,3 +502,14 @@ cursor: pointer;
     z-index: -1;
     transform: scale(1.1);
   `
+
+  export const Link = styled.a`
+  display: inline-block;
+  color: #000000;
+      font-weight: 300;
+      font-size: 12px;
+      text-transform: uppercase;
+      border: 1px solid #CDD4DE;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;`;

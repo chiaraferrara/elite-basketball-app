@@ -3,6 +3,7 @@ import { Context } from "./declarations/ContextProvider";
 import {
   CardForm,
   Input,
+  Link,
   Page,
   PageButton,
   PreviewPic,
@@ -12,7 +13,7 @@ import {
 
 import sadFace from "../assets/sad.svg";
 import basketBall from "../assets/basketball.svg";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Card, Modal, Typography } from "@mui/material";
 
 export default function PlayersPage() {
   const { fetchPlayers, players, setPlayers } = useContext(Context);
@@ -98,9 +99,22 @@ export default function PlayersPage() {
             }}
           >
             {players.map((player) => (
-              <div key={player.player_id}>
-                <PreviewPic src={player.picture} alt="player pic" />
+              <Card
+                style={{
+                  padding: "6px",
+                  margin: "10px",
+                  boxShadow: "0px -12px 0px 0.3px #ff3b3b",
+                  borderRadius: "0px",
+                }}
+                key={player.player_id}
+              >
+                <PreviewPic
+                  style={{ marginTop: "10px" }}
+                  src={player.picture}
+                  alt="player pic"
+                />
                 <h2>{player.name}</h2>
+                <Link href={`/team/${player.team_id}`}>Go to teams info</Link>
                 <p>Age : {player.age}</p>
 
                 {isLogged && (
@@ -127,7 +141,7 @@ export default function PlayersPage() {
                     </PageButton>
                   </>
                 )}
-              </div>
+              </Card>
             ))}
           </Row>
 
@@ -148,6 +162,7 @@ export default function PlayersPage() {
                   setAge(0);
                 }}
               >
+                <h4>Edit {name}</h4>
                 <legend>Name</legend>
                 <Input value={name} onChange={(e) => setName(e.target.value)} />
 

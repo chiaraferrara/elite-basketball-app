@@ -15,7 +15,15 @@ export default function App({ Component, pageProps }: AppProps) {
           body {
             font-family: "Poppins", sans-serif;
             margin: auto;
-            background-color: #ccc3c3;
+
+            background: rgb(204, 195, 195);
+            background: linear-gradient(
+              156deg,
+              rgba(204, 195, 195, 1) 0%,
+              rgba(204, 195, 195, 1) 0%,
+              rgba(112, 115, 114, 1) 100%
+            );
+
             // width: 60%;
           }
         `}
