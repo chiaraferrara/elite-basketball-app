@@ -14,6 +14,7 @@ import basketBall from "../assets/basketball.svg";
 export default function PlayersPage() {
   const { fetchPlayers, players, setPlayers } = useContext(Context);
   const [loading, setLoading] = useState(true);
+  const { isLogged, setIsLogged } = useContext(Context);
 
   useEffect(() => {
     fetchPlayers();
@@ -45,15 +46,20 @@ export default function PlayersPage() {
                 <PreviewPic src={player.picture} alt="player pic" />
                 <h2>{player.name}</h2>
                 <p>Age : {player.age}</p>
-                <PageButton
-                  onClick={() => {
-                    onClickDelete(player.player_id).then(() => {
-                      setLoading(!loading);
-                    });
-                  }}
-                >
-                  delete
-                </PageButton>
+
+                {isLogged && (
+                  <>
+                    <PageButton
+                      onClick={() => {
+                        onClickDelete(player.player_id).then(() => {
+                          setLoading(!loading);
+                        });
+                      }}
+                    >
+                      delete
+                    </PageButton>
+                  </>
+                )}
               </div>
             ))}
           </Row>
