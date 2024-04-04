@@ -92,6 +92,8 @@ export default function PlayersPage() {
         <>
           <Row
             style={{
+              width: "70%",
+              margin: "auto",
               justifyContent: "space-around",
               alignItems: "center",
               flexWrap: "wrap",
@@ -102,9 +104,12 @@ export default function PlayersPage() {
               <Card
                 style={{
                   padding: "6px",
-                  margin: "10px",
+                  marginTop: "40px",
+                  marginBottom: "30px",
+                  marginInline: "10px",
                   boxShadow: "0px -12px 0px 0.3px #ff3b3b",
                   borderRadius: "0px",
+                  minWidth: "250px",
                 }}
                 key={player.player_id}
               >
