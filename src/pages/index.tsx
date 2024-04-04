@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { Context } from "./declarations/ContextProvider";
+import { Context } from "../declarations/ContextProvider";
 import Link from "next/link";
-import { Player, Team } from "./declarations/declarations";
+import { Player, Team } from "../declarations/declarations";
 import GamesList from "./components/GamesList";
 import Leaderboard from "./components/Leaderboard";
 
@@ -17,7 +17,7 @@ export default function Home() {
     };
 
     fetchData();
-  }, []);
+  });
 
   return (
     <>

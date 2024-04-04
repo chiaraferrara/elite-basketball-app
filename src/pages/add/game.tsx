@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Context } from "../declarations/ContextProvider";
+import { Context } from "../../declarations/ContextProvider";
 import {
   CardForm,
   Input,
@@ -105,7 +105,7 @@ export default function Game() {
     } else {
       setIsLogged(false);
     }
-  }, []);
+  });
 
   if (!isLogged) {
     return (

@@ -8,7 +8,7 @@ import {
 } from "@/styles/globals";
 import { Typography } from "@mui/material";
 import { use, useContext, useEffect, useState } from "react";
-import { Context } from "../declarations/ContextProvider";
+import { Context } from "../../declarations/ContextProvider";
 import { useRouter } from "next/router";
 
 export default function Player() {
@@ -73,7 +73,7 @@ export default function Player() {
     } else {
       setIsLogged(false);
     }
-  }, []);
+  });
 
   //controllo sul login
 

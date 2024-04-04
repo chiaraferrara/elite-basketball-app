@@ -1,6 +1,6 @@
 import { CardForm, Input, PageButton, TeamGameColumn } from "@/styles/globals";
 import { useContext, useEffect, useState } from "react";
-import { Context } from "../declarations/ContextProvider";
+import { Context } from "../../declarations/ContextProvider";
 import { useRouter } from "next/router";
 
 export default function Team() {
@@ -46,7 +46,7 @@ export default function Team() {
     } else {
       setIsLogged(false);
     }
-  }, []);
+  });
 
   if (!isLogged) {
     return (

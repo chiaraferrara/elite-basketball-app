@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Context } from "./declarations/ContextProvider";
+import { Context } from "../declarations/ContextProvider";
 import {
   CardForm,
   Input,
@@ -207,7 +207,7 @@ export default function PlayersPage() {
                     alt="basketball"
                   />
                 </div>
-                <p>Unfortunately there's no players to display.</p>
+                <p>Unfortunately there&rsquo;s no players to display.</p>
               </div>
             </CardForm>
           </>

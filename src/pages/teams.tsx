@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Player, Team } from "./declarations/declarations";
+import { Player, Team } from "../declarations/declarations";
 import { useContext, useEffect, useState } from "react";
-import { Context } from "./declarations/ContextProvider";
+import { Context } from "../declarations/ContextProvider";
 import { CardForm, TeamDiv, TeamImg, TeamRow } from "@/styles/globals";
 import sadFace from "../assets/sad.svg";
 import basketBall from "../assets/basketball.svg";
@@ -18,7 +18,7 @@ export default function Teams() {
     };
 
     fetchData();
-  }, []);
+  });
 
   return (
     <>
@@ -56,7 +56,7 @@ export default function Teams() {
                 alt="basketball"
               />
             </div>
-            <p>Unfortunately there's no teams to display.</p>
+            <p>Unfortunately there&rsquo;s no teams to display.</p>
           </div>
         </CardForm>
       )}

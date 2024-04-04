@@ -1,4 +1,4 @@
-import { executeQuery } from "@/pages/mysqldb";
+import { executeQuery } from "@/mysqldb";
 
 
 export default async function handler(

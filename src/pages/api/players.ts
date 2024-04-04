@@ -1,5 +1,5 @@
 
-import { executeQuery } from "../mysqldb";
+import { executeQuery } from "../../mysqldb";
 
 export default async function handler(
   req : any,

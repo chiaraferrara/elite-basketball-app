@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Context } from "./declarations/ContextProvider";
+import { Context } from "../declarations/ContextProvider";
 import { useRouter } from "next/router";
 import { AnyARecord } from "dns";
 import {
@@ -13,7 +13,7 @@ import {
 import pswIcon from "../assets/psw.png";
 import mailIcon from "../assets/mail.png";
 
-export default function login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { isLogged, setIsLogged } = useContext(Context);
