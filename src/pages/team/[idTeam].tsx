@@ -162,7 +162,7 @@ export default function Team() {
   return (
     <div>
       {/* to add check on login */}
-      <GamesList />
+      {/* <GamesList /> */}
       <Wrapper>
         {" "}
         <RowWrap>
