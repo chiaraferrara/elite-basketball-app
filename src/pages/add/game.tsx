@@ -8,6 +8,7 @@ import {
   Select,
   TeamGameColumn,
 } from "@/styles/globals";
+import { useRouter } from "next/router";
 
 export default function Game() {
   const [teams, setTeams] = useState<any>([]);
@@ -18,6 +19,7 @@ export default function Game() {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const { setUpdate } = useContext(Context);
   const { setIsLogged, isLogged } = useContext(Context);
+  const router = useRouter();
 
   const getTeams = async () => {
     const response = await fetch("/api/teams");
@@ -125,95 +127,112 @@ export default function Game() {
             width: "fit-content",
           }}
         >
-          <form
-            method="post"
-            onSubmit={async (event) => {
-              addGameToDB(event);
-              updateTeamPoints(id_team1, team1Points, team2Points, true).then(
-                () => {
-                  setUpdate(true);
-                  updateTeamPoints(id_team2, team1Points, team2Points, true);
-                  setTeam1Points(0);
-                  setTeam2Points(0);
-                  setDate(undefined);
-                }
-              );
-            }}
-          >
-            <div>
-              <h3>Home Team:</h3>
+          {teams.length > 0 ? (
+            <form
+              method="post"
+              onSubmit={async (event) => {
+                addGameToDB(event);
+                updateTeamPoints(id_team1, team1Points, team2Points, true).then(
+                  () => {
+                    setUpdate(true);
+                    updateTeamPoints(id_team2, team1Points, team2Points, true);
+                    setTeam1Points(0);
+                    setTeam2Points(0);
+                    setDate(undefined);
+                  }
+                );
+              }}
+            >
+              <div>
+                <h3>Home Team:</h3>
 
-              <Select
-                onChange={(event) => {
-                  setTeam_id1(event.target.value);
-                }}
-              >
-                <option>Select Home team</option>
-                {teams.map((team: any) => (
-                  <option key={team.team_id} value={team.team_id}>
-                    {team.name}
-                  </option>
-                ))}
-              </Select>
-            </div>
-            <div>
-              <h3>Away Team:</h3>
+                <Select
+                  onChange={(event) => {
+                    setTeam_id1(event.target.value);
+                  }}
+                >
+                  <option>Select Home team</option>
+                  {teams.map((team: any) => (
+                    <option key={team.team_id} value={team.team_id}>
+                      {team.name}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+              <div>
+                <h3>Away Team:</h3>
 
-              <Select
-                onChange={(event) => {
-                  setTeam_id2(event.target.value);
-                }}
-              >
-                <option>Select away team</option>
-                {teams.map((team: any) => (
-                  <option key={team.team_id} value={team.team_id}>
-                    {team.name}
-                  </option>
-                ))}
-              </Select>
-            </div>
-            <br />
-            <div>
-              <legend>Date:</legend>
-              <Input
-                type="date"
-                id="date"
-                name="date"
-                value={date ? date.toISOString().split("T")[0] : ""} // YYYY-MM-DDTHH:mm:ss.sssZ, dove "T" separa la data dalla parte dell'ora e "Z" rappresenta il fuso orario UTC.
-                onChange={(event) => {
-                  const selectedDate = new Date(event.target.value);
-                  setDate(selectedDate);
-                }}
-              />
-            </div>
-            <br />
-            <div>
-              <legend>Add Home Team points :</legend>
-              <Input
-                type="number"
-                id="homePoints"
-                name="homePoints"
-                value={team1Points}
-                onChange={(event) => {
-                  setTeam1Points(event.target.value);
-                }}
-              />
+                <Select
+                  onChange={(event) => {
+                    setTeam_id2(event.target.value);
+                  }}
+                >
+                  <option>Select away team</option>
+                  {teams.map((team: any) => (
+                    <option key={team.team_id} value={team.team_id}>
+                      {team.name}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+              <br />
+              <div>
+                <legend>Date:</legend>
+                <Input
+                  type="date"
+                  id="date"
+                  name="date"
+                  value={date ? date.toISOString().split("T")[0] : ""} // YYYY-MM-DDTHH:mm:ss.sssZ, dove "T" separa la data dalla parte dell'ora e "Z" rappresenta il fuso orario UTC.
+                  onChange={(event) => {
+                    const selectedDate = new Date(event.target.value);
+                    setDate(selectedDate);
+                  }}
+                />
+              </div>
+              <br />
+              <div>
+                <legend>Add Home Team points :</legend>
+                <Input
+                  type="number"
+                  id="homePoints"
+                  name="homePoints"
+                  value={team1Points}
+                  onChange={(event) => {
+                    setTeam1Points(event.target.value);
+                  }}
+                />
 
-              <hr />
+                <hr />
 
-              <legend>Add Away Team points :</legend>
-              <Input
-                type="number"
-                id="awayPoints"
-                name="awayPoints"
-                value={team2Points}
-                onChange={(event) => {
-                  setTeam2Points(event.target.value);
-                }}
-              />
-            </div>
-            <PageButton type="submit">Add Game</PageButton>
-          </form>
+                <legend>Add Away Team points :</legend>
+                <Input
+                  type="number"
+                  id="awayPoints"
+                  name="awayPoints"
+                  value={team2Points}
+                  onChange={(event) => {
+                    setTeam2Points(event.target.value);
+                  }}
+                />
+              </div>
+              <PageButton type="submit">Add Game</PageButton>
+            </form>
+          ) : (
+            <>
+              <div style={{ display: "flex", flexFlow: "column" }}>
+                You can add a game once you have teams to associate with.
+                <br />
+                Add a team first.
+                <PageButton
+                  onClick={() => {
+                    router.push("/add/team");
+                  }}
+                >
+                  Add your team
+                </PageButton>
+              </div>
+            </>
+          )}
         </CardForm>
       </TeamGameColumn>
     </>
