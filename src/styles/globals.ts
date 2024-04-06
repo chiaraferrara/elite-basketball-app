@@ -502,7 +502,7 @@ cursor: pointer;
     transform: scale(1.1);
   `
 
-  export const Link = styled.a`
+  export const LinkInfo = styled.a`
   display: inline-block;
   color: #000000;
       font-weight: 300;
@@ -512,3 +512,22 @@ cursor: pointer;
       padding: 8px 14px;
       border-radius: 4px;
       cursor: pointer;`;
+
+      export const BlackScreen = styled.div`
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      `;
+
+      export const LoadingIcon = styled.img`
+      width: 40px;
+      height: 40px;
+      margin: 20px;
+      `;

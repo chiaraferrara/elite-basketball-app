@@ -33,5 +33,6 @@ export interface Player {
     setUpdate: (value: boolean) => void;
     updateLeaderboard : boolean;
     setUpdateLeaderboard: (value: boolean) => void;
+    associateGamesToTeam: (teamId: number) => any;
   }
    

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
-import { CardForm } from "@/styles/globals";
+import { BlackScreen, CardForm, LoadingIcon } from "@/styles/globals";
 import sadFace from "../assets/sad.svg";
 import basketBall from "../assets/basketball.svg";
 import {
@@ -12,6 +12,7 @@ import {
   TeamGameColumn,
   TeamName,
 } from "@/styles/globals";
+import loadingGif from "../assets/loading.gif";
 
 export default function Games() {
   const [loading, setLoading] = useState(true);
@@ -76,9 +77,11 @@ export default function Games() {
   };
 
   useEffect(() => {
-    fetchGames().then(() => setLoading(false));
-    const recentGames = games.reverse().slice(0, 4);
-    setGames(recentGames);
+    setTimeout(() => {
+      fetchGames().then(() => setLoading(false));
+      const recentGames = games.reverse().slice(0, 4);
+      setGames(recentGames);
+    }, 1000);
   }, [update, loading]);
 
   //metodo per formattare la data da "2024-03-13T23:00:00.000Z" a "13/03/2024"
@@ -98,7 +101,22 @@ export default function Games() {
       )
     : [];
 
-  if (loading) return <GamesRow>Loading games...</GamesRow>;
+  if (loading)
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            flexFlow: "column",
+            textAlign: "center",
+          }}
+        >
+          <BlackScreen>
+            <LoadingIcon src={loadingGif.src} alt="loading" />
+          </BlackScreen>
+        </div>
+      </>
+    );
 
   return (
     <>
@@ -186,7 +204,7 @@ export default function Games() {
                   alt="basketball"
                 />
               </div>
-              <p>Unfortunately there&rsquo;s no game to display.</p>
+              <img src={loadingGif.src} alt="loading" />
             </div>
           </CardForm>
         </>

@@ -13,7 +13,6 @@ import {
   TeamWrapper,
   Wrapper,
 } from "@/styles/globals";
-import GamesList from "../components/GamesList";
 import { Box, Modal, Typography } from "@mui/material";
 
 export default function Team() {
@@ -35,9 +34,13 @@ export default function Team() {
   const [logo, setLogo] = useState("");
   const [coach, setCoach] = useState("");
 
+  const [teamGames, setTeamGames] = useState<any[]>([]);
+
   const router = useRouter();
   const { idTeam } = router.query;
   const teamId = Number(idTeam);
+
+  const { associateGamesToTeam } = useContext(Context);
 
   //funzione che mi ritorna i dati del team
   const fetchDataFromAPI = async () => {
@@ -117,7 +120,33 @@ export default function Team() {
     console.log(data);
   };
 
+  const deleteGames = async (game_id: any) => {
+    const response = await fetch(`/api/game/${game_id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log("Game deleted");
+    }
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const deleteTeams = async (team_id: any) => {
+    const response = await fetch(`/api/team/${team_id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log("Team deleted");
+    }
+    const data = await response.json();
+    console.log(data);
+  };
+
   useEffect(() => {
+    // const teamGames = associateGamesToTeam(teamId).then((teamGames: any) => {
+    //   console.log("Team Games", teamGames);
+    // });
+    setTeamGames(teamGames);
     const loadTeam = async () => {
       const lsTeam = loadTeamFromLocalStorage();
       if (lsTeam && !update) {
@@ -136,6 +165,15 @@ export default function Team() {
     if (idTeam) {
       loadTeam();
     }
+
+    associateGamesToTeam(teamId)
+      .then((games: any) => {
+        setTeamGames(games);
+      })
+      .catch((error: any) => {
+        console.error("Error:", error);
+        setTeamGames([]);
+      });
   }, [idTeam, update]); //ogni volta che modifico, devono rifare il fetch
 
   if (loading) {
@@ -219,6 +257,10 @@ export default function Team() {
                       await deletePlayers(player.player_id);
                     })
                   );
+
+                  teamGames.map(async (game: any) => {
+                    await deleteGames(game.id_game);
+                  });
                   onClickDelete();
                 }
               }}

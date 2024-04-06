@@ -1,19 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../declarations/ContextProvider";
 import {
+  BlackScreen,
   CardForm,
   Input,
-  Link,
-  Page,
+  LinkInfo,
+  LoadingIcon,
   PageButton,
   PreviewPic,
   Row,
-  RowWrap,
 } from "@/styles/globals";
 
-import sadFace from "../assets/sad.svg";
-import basketBall from "../assets/basketball.svg";
-import { Box, Card, Modal, Typography } from "@mui/material";
+import { Box, Card, Modal } from "@mui/material";
+import loadingGif from "../assets/loading.gif";
 
 export default function PlayersPage() {
   const { fetchPlayers, players, setPlayers } = useContext(Context);
@@ -74,7 +73,10 @@ export default function PlayersPage() {
   };
 
   useEffect(() => {
-    fetchPlayers();
+    setTimeout(() => {
+      fetchPlayers();
+      setLoading(false);
+    }, 1000);
   }, [loading, updatePlayers]);
 
   const onClickDelete = async (player_id: any) => {
@@ -88,7 +90,7 @@ export default function PlayersPage() {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Players</h1>
-      {players.length > 0 ? (
+      {players.length > 0 && !loading ? (
         <>
           <Row
             style={{
@@ -119,7 +121,9 @@ export default function PlayersPage() {
                   alt="player pic"
                 />
                 <h2>{player.name}</h2>
-                <Link href={`/team/${player.team_id}`}>Go to teams info</Link>
+                <LinkInfo href={`/team/${player.team_id}`}>
+                  Go to teams info
+                </LinkInfo>
                 <p>Age : {player.age}</p>
 
                 {isLogged && (
@@ -190,32 +194,17 @@ export default function PlayersPage() {
         </>
       ) : (
         <>
-          <>
-            <CardForm>
-              <div
-                style={{
-                  display: "flex",
-                  flexFlow: "column",
-                  textAlign: "center",
-                }}
-              >
-                <div>
-                  {" "}
-                  <img
-                    style={{ width: "40px" }}
-                    src={sadFace.src}
-                    alt="sad face"
-                  />
-                  <img
-                    style={{ width: "40px" }}
-                    src={basketBall.src}
-                    alt="basketball"
-                  />
-                </div>
-                <p>Unfortunately there&rsquo;s no players to display.</p>
-              </div>
-            </CardForm>
-          </>
+          <div
+            style={{
+              display: "flex",
+              flexFlow: "column",
+              textAlign: "center",
+            }}
+          >
+            <BlackScreen>
+              <LoadingIcon src={loadingGif.src} alt="loading" />
+            </BlackScreen>
+          </div>
         </>
       )}
     </div>

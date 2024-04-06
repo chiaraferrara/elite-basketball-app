@@ -17,6 +17,7 @@ export const Context = createContext<TContext>({
   setUpdate: () => {},
   updateLeaderboard: false,
   setUpdateLeaderboard: () => {},
+  associateGamesToTeam: async () => [],
 });
 
 interface Props {
@@ -124,6 +125,40 @@ export default function ContextProvider({ children }: Props) {
     }
   };
 
+  const associateGamesToTeam = async (teamId: number) => {
+    try {
+      const gamesRes = await fetch("/api/games");
+      const gamesData = await gamesRes.json();
+
+      const teamsRes = await fetch("/api/teams");
+      const teamsData = await teamsRes.json();
+
+      const gamesWithTeams = gamesData.map((game: any) => {
+        const homeTeam = teamsData.find(
+          (team: any) => team.team_id === game.id_team1
+        );
+        const awayTeam = teamsData.find(
+          (team: any) => team.team_id === game.id_team2
+        );
+
+        return {
+          ...game,
+          home_team: homeTeam,
+          away_team: awayTeam,
+        };
+      });
+
+      const teamGames = gamesWithTeams.filter(
+        (game: any) => game.id_team1 === teamId || game.id_team2 === teamId
+      );
+
+      return teamGames;
+    } catch (error) {
+      console.error("Error fetching games:", error);
+      return [];
+    }
+  };
+
   const checkIsLogged = async () => {
     const logged = localStorage.getItem("isLogged");
     if (logged) {
@@ -151,6 +186,7 @@ export default function ContextProvider({ children }: Props) {
         setUpdate,
         updateLeaderboard,
         setUpdateLeaderboard,
+        associateGamesToTeam,
       }}
     >
       {children}
